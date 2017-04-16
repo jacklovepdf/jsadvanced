@@ -1,5 +1,5 @@
 # jsadvanced
-some tip about js
+some tips about js
 # demo1
 how to use loop statement more efficiently.
 # demo2
