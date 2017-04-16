@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generator Test</title>
+</head>
+<body>
+<article>
+    <header>
+        <h1>Generator</h1>
+        <p>
+            发表日期: <time pubdate="pubdate">2017/04/16</time>
+        </p>
+    </header>
+    <section>
+        <section>
+            <h2>generator demo1--next method</h2>
+            <div id="next-content">
+
+            </div>
+        </section>
+        <section>
+            <h2>generator demo2--send method</h2>
+            <div id="send-content">
+
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        <p><small>著作权归chengyong.lin所有</small></p>
+    </footer>
+</article>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script>
+    function* generator(name) {
+        yield "你好" + name +"!";
+        yield "很高兴见到你";
+        yield "希望我们能渡过一段愉快的时光";
+    }
+    var iter = generator("jacklin");
+    var nextEle = $("#next-content"),
+            ele = "";
+    for(var item of iter){
+        ele = ele + "<p>" + item + "</p> <br>";
+    }
+    nextEle.html(ele);
+
+    /*function* foo(x) {
+        yield x + 1;
+        var y = yield null;
+        return x + y;
+    }
+    iter = foo(5);
+    nextEle = $("#send-content");
+    ele = null;
+    ele = ele + "<p>" + iter.next() + "</p> <br>";
+    ele = ele + "<p>" + iter.next() + "</p> <br>";
+    ele = ele + "<p>" + iter.send(8) + "</p> <br>";
+    nextEle.html(ele);*/
+</script>
+</body>
+</html>
