@@ -1,14 +1,14 @@
 # jsadvanced
 
-A jsadvanced containing some tips, conclusions, best practices for your day to day workflow.
+The jsadvanced containing some tips, conclusions, best practices for your day to day workflow.
 of course, we cannot miss graph and demos to demonstrate!
 
 ## Table of Contents
 
-- [Process control statements-loop](#Process-control-statements-loop)
-- [Es6 Generator](#Es6-Generator)
-- [Several Solutions To Create Object](#Several-Solutions-To-Create-Object)
-- [var, let and const](#var-let-const)
+- [Process control statements-loop](#Process control statements-loop)
+- [Es6 Generator](#Es6 Generator)
+- [Several Solutions To Create Object](#Several Solutions To Create Object)
+- [var, let and const](#var, let and const)
 
 ## Process control statements-loop
 
@@ -78,3 +78,6 @@ es6 generator
 ```
 <img src="./docs/img/parasitic.png" height="300">
 ## var, let and const
+
+
+## 深度赋值对象
