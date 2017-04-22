@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>deepCopy demo</title>
+</head>
+<body>
+
+<script>
+    var obj = {
+        name: "jacklin"
+    };
+
+    var objCopy = Object.assign({},obj);
+
+    console.log(obj);
+    console.log(objCopy);
+
+    objCopy.name = "kathy";
+
+    console.log(obj);
+    console.log(objCopy);
+</script>
+</body>
+</html>

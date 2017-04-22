@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inherit demo</title>
+</head>
+<body>
+<article>
+    <header>
+        <h1>composite inherit(组合继承)</h1>
+        <p>
+            发表日期: <time pubdate="pubdate">2017/04/22</time>
+        </p>
+    </header>
+    <section>
+        <h2>组合继承/寄生组合继承</h2>
+        <div id="composite">
+            <p>通过原型链继承父类原型属性和方法，通过借用构造函数继承实例属性,但父类的构造函数执行两次</p>
+        </div>
+    </section>
+
+    <footer>
+        <p><small>著作权归jacklovepdf所有</small></p>
+    </footer>
+</article>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="./composite.js"></script>
+<!--<script src="./parasitic.js"></script>-->
+</body>
+</html>
