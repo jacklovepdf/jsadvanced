@@ -5,10 +5,10 @@ of course, we cannot miss graph and demos to demonstrate!
 
 ## Table of Contents
 
-- [Process control statements-loop](#Process control statements-loop)
-- [Es6 Generator](#Es6 Generator)
-- [Several Solutions To Create Object](#Several Solutions To Create Object)
-- [var, let and const](#var, let and const)
+- [Process control statements-loop](#Process-control-statements-loop)
+- [Es6 Generator](#Es6-Generator)
+- [Several Solutions To Create Object](#Several-Solutions-To-Create-Object)
+- [var, let and const](#var-let-const)
 
 ## Process control statements-loop
 
