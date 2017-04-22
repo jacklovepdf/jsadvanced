@@ -76,6 +76,5 @@ es6 generator
     var SubObj = new SubClass("jacklin", 19);
     console.log(SubObj);
 ```
-![组合继承模式创建的对象](./docs/img/parasitic.png)
-
+<img src="./docs/img/parasitic.png" style="width:100%; height:300px">
 ## var, let and const
