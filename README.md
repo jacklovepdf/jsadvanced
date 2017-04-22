@@ -48,7 +48,7 @@ es6 generator
     };
     var SubObj = new SubClass("jacklin", 19);
 ```
-![组合继承模式创建的对象](./docs/img/composite.png =800*300)
+<img src="./docs/img/composite.png" height="300">
 
 寄生组合继承模式
 ```javascript
@@ -76,5 +76,5 @@ es6 generator
     var SubObj = new SubClass("jacklin", 19);
     console.log(SubObj);
 ```
-![组合继承模式创建的对象](./docs/img/parasitic.png =800*300)
+<img src="./docs/img/parasitic.png" height="300">
 ## var, let and const
