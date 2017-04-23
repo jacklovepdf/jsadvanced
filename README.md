@@ -10,6 +10,10 @@ of course, we cannot miss graph and demos to demonstrate!
 - [Several Solutions To Create Object](#Several-Solutions-To-Create-Object)
 - [Variables Declaration](#var-let-const)
 - [Destructuring](#Destructuring)
+- [Function And Arrow Function](#Function)
+- [This](#Symbols)
+- [Symbols](#Symbols)
+- [Proxy](#Proxy)
 
 ## Process control statements-loop
 
@@ -185,3 +189,8 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
 ```javascript
     const {PropertyA, PropertyB} = require("CommonJs module");
 ```
+
+## Function And Arrow Function
+
+
+## This
