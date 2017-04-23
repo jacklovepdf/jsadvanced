@@ -82,6 +82,7 @@ es6 generator
 * var
 * let
 * const
+
 var变量声明无论出现在代码的任何位置，都会在任何代码执行之前处理(var hoisting)。使用var语句声明的变量的*作用域*是*当前执行位置的上下文*：
 一个函数的内部（声明在函数内）或者全局（声明在函数外）。
 
@@ -90,11 +91,11 @@ var变量声明无论出现在代码的任何位置，都会在任何代码执�
 let允许你声明一个作用域被限制在块级中的变量、语句或者表达式。而var关键字声明的变量只能作用于全局或者整个函数块内。
 
 在程序或者函数的顶层，let并不会像var一样在全局对象上创造一个属性，比如：
-<img src="./images/var-let.png" height="150" width="500">
+<img src="./images/var-let.png" height="120" width="500">
 
 let 将会提升这个变量到语句块的顶部。然而，在这个语句块中，在变量声明之前引用这个变量会导致一个 ReferenceError的结果,
 因为let变量 在"暂存死区" (从块的开始到声明这段).
-<img src="./images/tempdead.png" height="150" width="500">
+<img src="./images/tempdead.png" height="120" width="500">
 
 const声明并初始化一个只读的常量。常量拥有块作用域。常量的值不能通过再赋值改变，也不能再次声明。
 这不意味着常量指向的值不可变，而是变量标识符的值只能赋值一次。
