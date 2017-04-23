@@ -158,6 +158,7 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     const [first, second] = arr;
 ```
 * the scene of destructuring
+
 1.函数参数的定义, 对于设计良好的api,通常为函数设计一个对象作为函数的参数，这样可以避免开发者需要记住多个参数的使用顺序。
     同时，使用解构可以避免为这些参数属性创建临时的引用。
 ```javascript
@@ -182,5 +183,5 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     当我们导入CommonJS模块的时候，很可能在模块中存在很多用不上的方法，通过解构可以很方便的定义模块的一部分方法拆分使用
     这样可以避免命名空间的污染。
 ```javascript
-    const {PropertyA, PropertyA} = require("CommonJs module");
+    const {PropertyA, PropertyB} = require("CommonJs module");
 ```
