@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10704686-bf35-49e9-bb8a-37de856eea7f" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/img/composite.png" afterPath="$PROJECT_DIR$/images/composite.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/img/parasitic.png" afterPath="$PROJECT_DIR$/images/parasitic.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
@@ -41,8 +39,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
+            <state relative-caret-position="-133">
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,8 +143,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="198" />
-    <option name="y" value="67" />
+    <option name="x" value="75" />
+    <option name="y" value="73" />
     <option name="width" value="1440" />
     <option name="height" value="805" />
   </component>
@@ -302,15 +300,15 @@
       <updated>1489397709969</updated>
       <workItem from="1489397711152" duration="984000" />
       <workItem from="1492238198567" duration="8212000" />
-      <workItem from="1492846255112" duration="11973000" />
+      <workItem from="1492846255112" duration="13515000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21169000" />
+    <option name="totallyTimeSpent" value="22711000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="198" y="67" width="1440" height="805" extended-state="0" />
+    <frame x="75" y="73" width="1440" height="805" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -447,8 +445,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="106" column="37" selection-start-line="106" selection-start-column="37" selection-end-line="106" selection-end-column="37" />
+        <state relative-caret-position="-133">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding />
         </state>
       </provider>
