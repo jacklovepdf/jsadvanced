@@ -9,6 +9,7 @@ of course, we cannot miss graph and demos to demonstrate!
 - [Es6 Generator](#Es6-Generator)
 - [Several Solutions To Create Object](#Several-Solutions-To-Create-Object)
 - [Variables Declaration](#var-let-const)
+- [Destructuring](#Destructuring)
 
 ## Process control statements-loop
 
@@ -95,6 +96,7 @@ let允许你声明一个作用域被限制在块级中的变量、语句或者�
 
 let 将会提升这个变量到语句块的顶部。然而，在这个语句块中，在变量声明之前引用这个变量会导致一个 ReferenceError的结果,
 因为let变量 在"暂存死区" (从块的开始到声明这段).
+
 <img src="./images/tempdead.png" height="100" width="400">
 
 const声明并初始化一个只读的常量。常量拥有块作用域。常量的值不能通过再赋值改变，也不能再次声明。
@@ -108,4 +110,52 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     MY_OBJECT.key = "otherValue";
 ```
 
-## 深度赋值对象
+## Destructuring
+* object destructuring
+> **Best Practice**: Use object destructuring for multiple return values, not array destructuring;
+    Destructuring saves you from creating temporary references for those properties.
+
+```javascript
+    var user = {
+            firstName: "lin",
+            lastName: "chengyong"
+    }
+    // bad
+    function getFullName(user) {
+      const firstName = user.firstName;
+      const lastName = user.lastName;
+      ...
+      return [firstName, lastName];
+    }
+    //the caller needs to know the order of return data
+    var [firstName, lastName] = getFullName(user);
+
+    // good
+    function getFullName(user) {
+      const { firstName, lastName } = user;
+      ...
+      return {firstName, lastName};
+    }
+
+    // best
+    function getFullName({ firstName, lastName }) {
+      ...
+      return {firstName, lastName};
+    }
+    // the caller selects only the data they need
+    var {firstName, lastName} = getFullName(user);
+
+```
+* array destructuring
+
+```javascript
+    const arr = [1, 2, 3, 4];
+
+    // bad
+    const first = arr[0];
+    const second = arr[1];
+
+    // good
+    const [first, second] = arr;
+```
+
