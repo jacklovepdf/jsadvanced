@@ -79,9 +79,9 @@ es6 generator
 <img src="./images/parasitic.png" height="300">
 
 ## Variables Declaration
-    * var
-    * let
-    * const
+* var
+* let
+* const
 var变量声明无论出现在代码的任何位置，都会在任何代码执行之前处理(var hoisting)。使用var语句声明的变量的*作用域*是*当前执行位置的上下文*：
 一个函数的内部（声明在函数内）或者全局（声明在函数外）。
 
