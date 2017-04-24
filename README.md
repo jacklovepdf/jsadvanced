@@ -106,11 +106,11 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
 这不意味着常量指向的值不可变，而是变量标识符的值只能赋值一次。
 ```javascript
     // 常量可以定义成对象
-    const MY_OBJECT = {"key": "value"};
+    const myObj = {"key": "value"};
     // 重写对象一样会失败
-    MY_OBJECT = {"OTHER_KEY": "value"};
+    myObj = {"OTHER_KEY": "value"};
     // 常量对象的属性是可以重写的
-    MY_OBJECT.key = "otherValue";
+    myObj.key = "otherValue";
 ```
 
 ## Destructuring
@@ -213,6 +213,60 @@ This harms readability and maintainability.anonymous functions can make it harde
       // ...
     };
 ```
+* Always put default parameters last.
+```javascript
+    // bad
+    function handler(opts = {}, name) {
+      // ...
+    }
+
+    // good
+    function handler(name, opts = {}) {
+      // ...
+    }
+```
+* Never mutate parameters.
+```javascript
+    // bad
+    function f1(obj) {
+      obj.key = 1;
+    }
+
+    // good
+    function f2(obj) {
+      const key = Object.prototype.hasOwnProperty.call(obj, 'key') ? obj.key : 1;
+    }
+```
 * Arrow Function
 
 ## This
+函数的调用方式决定了this的值。this不能在执行期间被赋值，在每次函数被调用时this的值也可能会不同。
+ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被调用的。
+
+* 在全局作上下文中运行（任何函数外部),this指代全局对象。
+```javascript
+    function sum(num1, num2){
+    	return num1+num2;
+    }
+    sum(2,3);//5
+    this.sum(2,1);//3
+    window.sum(2,1);//3
+```
+* 函数上下文
+>**Note**:在函数内部，this的值取决于函数是如何调用的。
+
+在严格模式下执行，并且this的值不会在函数执行时被设置，此时的this的值会默认设置为全局对象。
+```javascript
+    function f1(){
+      return this;
+    }
+    f1() === window; // true
+```
+在严格模式下，如果this未被执行的上下文环境定义，那么它将会默认为undefined。
+```javascript
+    function f2(){
+      "use strict"; // 这里是严格模式
+      return this;
+    }
+    f2() === undefined; // true
+```
