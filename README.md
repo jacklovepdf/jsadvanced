@@ -191,6 +191,28 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
 ```
 
 ## Function And Arrow Function
+在JavaScript中，函数是第一等对象，不仅因为它既可以像普通对象一样拥有属性和方法，而且重要的是它可以被调用。简单来说它们是Function对象。
+函数不同于过程。函数总是会返回一个值，但是一个过程有可能返回一个值，也有可能不返回,如果一个函数中没有使用return语句，则它默认返回undefined。
+>**Note**:在函数执行时，this 关键字并不会指向正在运行的函数本身，而是指向调用该函数的对象。
+* Use named function expressions instead of function declarations.
+Function declarations are hoisted, which means that it’s easy - too easy - to reference the function before it is defined in the file.
+This harms readability and maintainability.anonymous functions can make it harder to locate the problem in an Error's call stack.
+```javascript
+    // bad
+    function foo() {
+      // ...
+    }
 
+    // bad
+    const foo = function () {
+      // ...
+    };
+
+    // good
+    const foo = function bar() {
+      // ...
+    };
+```
+* Arrow Function
 
 ## This
