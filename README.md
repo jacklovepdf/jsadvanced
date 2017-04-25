@@ -253,7 +253,7 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
     window.sum(2,1);//3
 ```
 * 函数上下文
->**Note**:在函数内部，this的值取决于函数是如何调用的。
+>**Note**:在函数内部，this的值取决于**函数是如何调用的**。
 
 在严格模式下执行，并且this的值不会在函数执行时被设置，此时的this的值会默认设置为全局对象。
 ```javascript
@@ -269,4 +269,125 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
       return this;
     }
     f2() === undefined; // true
+```
+
+1. 以对象方法调用.
+>**Note**: 当以对象里的方法的方式调用函数时，它们的 this 是调用该函数的对象.
+```javascript
+    var obj = {
+    	prop: "jack",
+    	fa: function(){
+    		console.log(this.prop)
+    	},
+    	g: {
+    		prop: "kathy",
+    		fb: function(){
+    			console.log(this.prop)
+    		}
+    	}
+    }
+    obj.fa();//jack
+    obj.g.fb();//kathy
+
+
+    var obj = {
+    	prop: "jack",
+    	fa: function(){
+    		console.log(this.prop)
+    	},
+    	g: {
+    		fb: function(){
+    			console.log(this.prop)
+    		}
+    	}
+    }
+    obj.fa();//jack
+    obj.g.fb();//kathy
+
+    var obj = {
+    	prop: "jack",
+    	fa: function(){
+    		console.log(this.prop)
+    	},
+    	g: {
+    		fb: function(){
+    			console.log(this)
+    		}
+    	}
+    }
+    obj.fa();//jack
+    obj.g.fb();//undefined
+```
+
+2.原型链中的 this
+>**Note**: 函数作为那个对象的方法，this就是指代是哪个对象（是父对象还是子对象）。
+```javascript
+    var o = {
+      f : function(){
+        return this.a + this.b;
+      },
+      a: 2,
+      b: 7
+    };
+    var p = Object.create(o);
+    p.a = 1;
+    p.b = 4;
+    //因为f是作为p的方法调用的，所以它的this指向了p
+    console.log(p.f()); // 5
+    //因为f是作为o的方法调用的，所以它的this指向了o
+    console.log(o.f()); // 9
+```
+
+3.call 和 apply
+>**Note**: 所有函数都从Function对象的原型中继承的call()方法和apply()方法.
+```javascript
+    function add(c, d){
+      return this.a + this.b + c + d;
+    }
+
+    var o = {a:1, b:3};
+
+    // The first parameter is the object to use as 'this', subsequent parameters are passed as
+    // arguments in the function call
+    add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
+
+    // The first parameter is the object to use as 'this', the second is an array whose
+    // members are used as the arguments in the function call
+    add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+```
+
+4. bind
+ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函数中this将永久地被绑定到了bind的第一个参数，无论这个函数是如何被调用的。
+
+5. DOM事件处理函数中的 this
+>**Note**: 当函数被用作事件处理函数时，它的this指向触发事件的元素（一些浏览器在使用非addEventListener的函数动态添加监听函数时不遵守这个约定）。
+```javascript
+    <div class="header">
+            i am a worker.
+    </div>
+    <script>
+        var ele = document.getElementsByClassName('header');
+        var clickHandler = function (e) {
+            console.log(this === e.currentTarget); // 总是 true
+            // 当 currentTarget 和 target 是同一个对象是为 true
+            console.log(this === e.target);
+            this.style.backgroundColor = '#A5D9F3';
+        };
+        ele[0].addEventListener("click",clickHandler, false);
+    </script>
+```
+6. 内联事件处理函数中的 this
+当代码被内联处理函数调用时，它的this指向监听器所在的DOM元素：
+```javascript
+    //button
+    <button onclick="alert(this.tagName.toLowerCase());">
+      Show this
+    </button>
+```
+>**Note**: 只有外层代码中的this是这样设置的,函数体内部的this,根据具体情况而定。
+```javascript
+    //没有设置内部函数的 this，所以它指向 global/window 对象
+    <button onclick="alert((function(){return this})());">
+      Show inner this
+    </button>
 ```

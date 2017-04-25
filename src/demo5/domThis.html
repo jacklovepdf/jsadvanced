@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom event handler func of this</title>
+</head>
+<body>
+    <div class="header">
+        i am a worker.
+    </div>
+    <script>
+        var ele = document.getElementsByClassName('header');
+        var clickHandler = function (e) {
+            console.log(this === e.currentTarget); // 总是 true
+            // 当 currentTarget 和 target 是同一个对象是为 true
+            console.log(this === e.target);
+            this.style.backgroundColor = '#A5D9F3';
+        };
+        ele[0].addEventListener("click",clickHandler, false);
+    </script>
+</body>
+</html>
