@@ -7,13 +7,13 @@ of course, we cannot miss graph and demos to demonstrate!
 
 - [Process control statements loop](#process-control-statements-loop)
 - [Es6 Generator](#es6-generator)
-- [Prototype Inherit](#Several-Solutions-To-Create-Object)
-- [Variables Declaration](#var-let-const)
-- [Destructuring](#Destructuring)
-- [Function](#Function)
-- [This](#Symbols)
-- [Symbols](#Symbols)
-- [Proxy and Reflect](#Proxy)
+- [Prototype Inherit](#prototype-inherit)
+- [Variables Declaration](#variables-declaration)
+- [Destructuring](#destructuring)
+- [Function](#function)
+- [This](#this)
+- [Symbols](#symbols)
+- [Proxy and Reflect](#proxy-and-reflect)
 
 ## Process control statements loop
 
