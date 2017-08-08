@@ -5,17 +5,17 @@ of course, we cannot miss graph and demos to demonstrate!
 
 ## Table of Contents
 
-- [Process control statements-loop](#Process-control-statements-loop)
-- [Es6 Generator](#Es6-Generator)
-- [Several Solutions To Create Object](#Several-Solutions-To-Create-Object)
+- [Process control statements loop](#process-control-statements-loop)
+- [Es6 Generator](#es6-generator)
+- [Prototype Inherit](#Several-Solutions-To-Create-Object)
 - [Variables Declaration](#var-let-const)
 - [Destructuring](#Destructuring)
-- [Function And Arrow Function](#Function)
+- [Function](#Function)
 - [This](#Symbols)
 - [Symbols](#Symbols)
-- [Proxy](#Proxy)
+- [Proxy and Reflect](#Proxy)
 
-## Process control statements-loop
+## Process control statements loop
 
 how to use loop statement more efficiently.
 
@@ -25,9 +25,9 @@ how to use loop statement more efficiently.
 
 ```
 
-## Several Solutions To Create Object
+## Prototype Inherit
 
-组合继承模式
+combination inheritance(compose constructor stealing and prototype chain)
 ```javascript
     function SuperClass(name){
         this.name = name;
@@ -39,14 +39,11 @@ how to use loop statement more efficiently.
         }
     };
     function SubClass(name, age){
-        //借用父类构造函数
+        //constructor stealing
         SuperClass.call(this, name);
         this.age = age;
     }
-    SubClass.prototype = {
-        constructor: SubClass,
-
-    };
+    SubClass.prototype = new SuperClass();
     SubClass.prototype.sayAge = function(){
         console.log(this.age);
     };
@@ -66,11 +63,11 @@ how to use loop statement more efficiently.
         }
     };
     function SubClass(name, age){
-        //借用父类构造函数
+        //constructor stealing, inherit instance property of SuperClass
         SuperClass.call(this, name);
         this.age = age;
     }
-
+    //inherit prototype property of SuperClass
     SubClass.prototype = Object.assign({}, SuperClass.prototype);
     SubClass.prototype.constructor = SubClass;
 
@@ -190,7 +187,7 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     const {PropertyA, PropertyB} = require("CommonJs module");
 ```
 
-## Function And Arrow Function
+## Function
 在JavaScript中，函数是第一等对象，不仅因为它既可以像普通对象一样拥有属性和方法，而且重要的是它可以被调用。简单来说它们是Function对象。
 函数不同于过程。函数总是会返回一个值，但是一个过程有可能返回一个值，也有可能不返回,如果一个函数中没有使用return语句，则它默认返回undefined。
 >**Note**:在函数执行时，this 关键字并不会指向正在运行的函数本身，而是指向调用该函数的对象。
@@ -238,6 +235,13 @@ This harms readability and maintainability.anonymous functions can make it harde
     }
 ```
 * Arrow Function
+
+
+* getter
+ get 语法将一个对象属性绑定到查询该属性时将被调用的一个函数上。
+
+* setter
+
 
 ## This
 函数的调用方式决定了this的值。this不能在执行期间被赋值，在每次函数被调用时this的值也可能会不同。
@@ -391,3 +395,5 @@ ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函�
       Show inner this
     </button>
 ```
+
+## Symbols
