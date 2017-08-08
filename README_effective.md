@@ -37,6 +37,23 @@ summary of effective javascript
 
 ## Variable Scope
 
+> 6.尽量用局部变量，而不是全局变量。
+
+
+
+> 7.熟练使用闭包。
+
+
+
+> 8.理解变量的声明的提升。
+
+
+
+> 9.关于eval函数的使用。
+
+
+
+> 10.
 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>

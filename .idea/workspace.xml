@@ -42,8 +42,8 @@
       <file leaf-file-name="README_effective.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README_effective.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+            <state relative-caret-position="360">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,8 +69,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="15" />
-    <option name="y" value="273" />
+    <option name="x" value="101" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="803" />
   </component>
@@ -201,15 +201,15 @@
       <option name="presentableId" value="Default" />
       <updated>1502155712625</updated>
       <workItem from="1502155713886" duration="3031000" />
-      <workItem from="1502168468511" duration="1543000" />
+      <workItem from="1502168468511" duration="2187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4574000" />
+    <option name="totallyTimeSpent" value="5218000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="15" y="273" width="1440" height="803" extended-state="0" />
+    <frame x="101" y="23" width="1440" height="803" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -272,8 +272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README_effective.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        <state relative-caret-position="360">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
