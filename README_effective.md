@@ -14,6 +14,23 @@ summary of effective javascript
 
 ## Accustoming Yourself to Javascript
 
+> 1.了解你使用的js版本。
+
+
+> 2.理解js的浮点数。
+
+
+
+> 3.当心数据类型的隐式转换。
+
+
+> 4.了解分号插入的局限。
+
+
+
+> 5.Think of Strings As Sequences of 16-Bit Code Units
+
+
 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
