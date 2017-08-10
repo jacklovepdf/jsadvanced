@@ -94,6 +94,23 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
     "aaa" + {toString: function(){return "bbb";}} = "aaabbb";
 ```
 
+（4）真值运算（if || &&）
+js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
+
+（5）关系运算
+```javascript
+    ==运算浮
+    null  == undefined                      true
+    null/undefined == 其它非null/undefined   false
+    原始类型(string/number/boolean)  ==  原始类型(string/number/boolean)      将原始类型转化为数字
+    原始类型(string/number/boolean)  ==  Date对象                            将原始类型转化为数字，将Date转化为原始类型(优先使用toString，再尝试valueOf)
+    原始类型(string/number/boolean)  ==  非Date对象                          将原始类型转化为数字，将非Date对象转化为原始类型(优先使用valueOf，再尝试toString)
+    //使用==运算符会应用一套复杂的隐式强制转换规则，当比较不同类型的数据类型时，使用自己的显示强制转换方法使得程序的行为能给更好的被理解，尽量使用===运算符；
+```
+
+> **Note**: 隐式地强制类型转化虽然能够有时候带来遍历，但同时给有问题程序的调试带来了挑战，因为它掩盖了错误，使得错误更难诊断；
+同时为了避免隐式地强制类型转化潜在的风险，应该尽量避免对混合类型使用 ＝＝ 运算浮
+
 > 4.了解分号插入的局限。
 
 
