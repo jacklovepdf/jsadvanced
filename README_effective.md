@@ -99,7 +99,7 @@ js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
 
 （5）关系运算
 ```javascript
-    ==运算浮
+    1、==运算浮
     null  == undefined                      true
     null/undefined == 其它非null/undefined   false
     原始类型(string/number/boolean)  ==  原始类型(string/number/boolean)      将原始类型转化为数字
@@ -109,7 +109,7 @@ js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
 ```
 
 > **Note**: 隐式地强制类型转化虽然能够有时候带来遍历，但同时给有问题程序的调试带来了挑战，因为它掩盖了错误，使得错误更难诊断；
-同时为了避免隐式地强制类型转化潜在的风险，应该尽量避免对混合类型使用 ＝＝ 运算浮
+同时为了避免隐式地强制类型转化潜在的风险，应该尽量避免对混合类型使用==运算符；
 
 > 4.了解分号插入的局限。
 
