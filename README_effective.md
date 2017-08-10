@@ -59,7 +59,9 @@ summary of effective javascript
 （2）对于位运算，首先会将操作数转化为32位整数，然后使用整数的位模式进行运算，最后将结果转化js标准的浮点数。
 
 > 3.当心数据类型的隐式转换。
+
 javascript中提供了6中数据类型，包括5中简单数据类型（或者称基本数据类型）(null、undefined、boolean、string以及number)和1中复杂数据类型object.
+
 （1）算数运算
 计算之前算术运算会尝试把操作数转化为数字类型，'＋'运算浮除外；
 ```javascript
@@ -76,6 +78,21 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 ```
 （2）位运算
 计算之前算术运算会尝试把操作数转化为32位整数类型；
+
+（3）＋运算符
+＋运算符既重载了数字相加，又重载了字符串连接操作，当＋运算符两个操作数一个为字符串一个为数字类型时，＋运算符更偏爱进行字符串连接操作；
+```javascript
+    number(0) -------------> "0"
+    undefined -------------> "undefined"
+    false/true ------------> "false/true"
+    object ----------------> 通过toString方法转化为字符串
+
+    "aaa" + null = "aaanull";
+    "aaa" + false = "aaafalse";
+    "aaa" + true = "aaatrue";
+    "aaa" + undefined = "aaaundefined";
+    "aaa" + {toString: function(){return "bbb";}} = "aaabbb";
+```
 
 > 4.了解分号插入的局限。
 
