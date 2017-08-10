@@ -62,11 +62,12 @@ summary of effective javascript
 javascript中提供了6中数据类型，包括5中简单数据类型（或者称基本数据类型）(null、undefined、boolean、string以及number)和1中复杂数据类型object.
 （1）算数运算
 计算之前算术运算会尝试把操作数转化为数字类型，'＋'运算浮除外；
-null -------------> 0
-undefined --------> NaN
-false/true -------> 0/1
-object -----------> 通过期valueOf方法转化为数字
 ```javascript
+    null -------------> 0
+    undefined --------> NaN
+    false/true -------> 0/1
+    object -----------> 通过期valueOf方法转化为数字
+
     1 + null = 1;
     1 + false = 1;
     1 + true = 2;
