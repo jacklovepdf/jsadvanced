@@ -114,10 +114,16 @@ js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
 > 4.了解分号插入的局限。
 
 
-
 > 5.Think of Strings As Sequences of 16-Bit Code Units
 
+现在unicode代码点由20位二进制数来表示，其中最初设定的$(2)^16个码点称为基本多文件平面，余下16个大小为$(2)^16d的范围被称为辅助平面；
+unicode代码点与编码元素一一对应，utf-16中每个代码点需要一到两个16位的代码单元来表示，因此utf－16是可变长度的编码；
+javascript字符串中是采用的是16位的代码单元，因此字符串方法和属性都是基于代码单元层级，而不是代码点层级，因此当字符串中包含辅助平面的代码点的时候
+js字符串中该代码点表示长度为2；
+```javascript
+"💩".length = 2
 
+```
 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
