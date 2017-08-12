@@ -215,11 +215,41 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
     }
     test(); // "global";
 ```
-
-
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 ## Working with Functions
+
+13.函数应用场景
+（1）函数的调用
+    函数调用将全局对象（严格模式则为undefined）作为接受者，一般很少使用函数调用的语法调用方法；
+（2）方法调用
+    在方法调用中，是由调用表达式自身来确定this变量的绑定；绑定到this变量的对象被称为**调用接受者**。
+    方法的本质是通过特定对象调用的函数；
+```javascript
+    var obj = {
+        hello: function(){
+            return "hello, " + this.username;
+        }
+        username: "jack"
+    }
+    var obj1 = {
+        hello: obj.hello
+        username: "mark"
+    }
+    obj1.hello();//"hello, mark"
+```
+（3）构造函数
+    构造函数将一个全新的对象作为函数的接受者，变返回这个新对象作为调用的结果；
+
+（4）高阶函数
+    高阶函数是将函数作为参数或者返回值的函数，将函数作为参数（通常称为回调函数）是一种特别强大的管用用法；
+
+14.自定义函数的接受者
+
+
+15.函数的参数arguments
+
+16.不要信赖函数的toString方法
 
 
 
