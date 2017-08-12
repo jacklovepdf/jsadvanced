@@ -122,7 +122,6 @@ javascript字符串中是采用的是16位的代码单元，因此字符串方�
 js字符串中该代码点表示长度为2；
 ```javascript
 "💩".length = 2
-
 ```
 > **Note**: 可以使用第三方库来编写可识别代码点的字符串操作；
 
@@ -130,13 +129,40 @@ js字符串中该代码点表示长度为2；
 
 ## Variable Scope
 
-> 6.尽量用局部变量，而不是全局变量。
+> 6.尽量用局部变量，而不是全局变量，使用全局对象来做平台特性检测。
 
-
+**Note**: 故意创建全局变量是不好的风格，而意外的创建全局变量则是彻头彻尾的灾难，因此实际项目中推荐程序员使用lint等工具来检测程序中不好的风格和潜在的错误；
 
 > 7.熟练使用闭包。
+（1） definition
+有权访问另一个函数作用域中变量的函数；
+（2） feature
+即时外部函数已经返回，闭包任然可以引用外部函数定义的变量；
+```javascript
+    function FullName(firstName){
+        return function(lastName){
+            return firstName + " " + lastName;
+        };
+    }
+    var firtNameLin =  FullName("lin");
+    firtNameLin("chengyong"); // lin chengyong
+    firtNameLin("chengjia"); // lin chengjia
+```
+**Note**: 闭包会存储对外部变量的引用；闭包是js最优雅，最有表现力的特性之一；
 
-
+闭包可以更新外部变量的值；因为闭包存储了外部变量的引用，而不是它们的副本，因此，它可以更新外部变量的值；
+```javascript
+    function Person(){
+        var name = "";
+        return{
+            set: function(val){name=val;},
+            get: function(){return name;}
+        }
+    }
+    var person = Person();
+    person.set("jack");
+    person.get()// jack
+```
 
 > 8.理解变量的声明的提升。
 
