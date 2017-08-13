@@ -313,6 +313,9 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
     //方法二
     sources.forEach(buffer.add.bind(buffer));//buffer.add.bind(buffer)创建了一个新函数，新函数的接受者绑定到buffer对象；
 ```
+
+    使用bind方法实现函数的柯里化；
+    
 > 16.不要信赖函数的toString方法
 
 
