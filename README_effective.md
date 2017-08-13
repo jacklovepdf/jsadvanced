@@ -315,10 +315,26 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 ```
 
     使用bind方法实现函数的柯里化；
-    
+```javascript
+    function simpleUrl(protocal, domain, path) {
+      return protocal + "://" + domain + "/" + path;
+    }
+    var paths = ["www/index.html", "touch/index.html"];
+    var urls = paths.map(function(path) {
+       return simpleUrl("http","baidu.com",path);
+    })
+    //匿名函数中每次传给simpleUrl函数的前两个参数是固定的，只有第三个参数是变化的；
+    //可以使用函数的bind方法来自动构建该匿名函数；
+    var urls1 = paths.map(simpleUrl.bind(null,"http","baidu.com"));
+    //函数柯里化，将函数与其参数的一个子集绑定的技术称为函数柯里化；
+    //simpleUrl.bind除了绑定接受者参数的其余参数和提供给新函数的所有参数共同组成了传递给simpleUrl函数的参数；
+```    
+
 > 16.不要信赖函数的toString方法
 
+> 17.避免使用非标准的栈检查属性；
 
+    避免使用非标准的arguments.callee和arguments.caller属性，因为它不具备良好的可移植性；
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
