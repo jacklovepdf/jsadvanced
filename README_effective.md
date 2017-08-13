@@ -231,11 +231,11 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
     var obj = {
         hello: function(){
             return "hello, " + this.username;
-        }
+        },
         username: "jack"
     }
     var obj1 = {
-        hello: obj.hello
+        hello: obj.hello,
         username: "mark"
     }
     obj1.hello();//"hello, mark"
@@ -249,6 +249,32 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
  **Note**: 需要引入高阶函数进行抽象的场景是出现重复或者相似的代码。
 
 > 14.自定义函数的接受者
+    函数或者方法的接受者（即绑定到this值）是由调用者的语法决定的。
+（1）call
+    函数对象内置的call方法自定义接受者；
+```javascript
+    var hasOwnProperty = {}.hasOwnProperty;
+    var dict = {
+        foo: 1
+    };
+    delete dict.hasOwnProperty;
+    hasOwnProperty.call(dict, "foo"); //true
+    hasOwnProperty.call(dict, "hasOwnProperty"); //false
+```
+ **Note**: 使用call方法可以调用在给定对象中不存在的方法；自定义高阶函数的时候，允许使用者给回调函数指定接受者；
+
+（2）apply
+    函数内置的apply方法与call方法类似，apply方法需要一个参数数组，然后将数组的每个元素作为调用的单独参数调用该函数；
+```javascript
+    function sum() {
+       for(var i=0, sum=0; i<arguments.length; i++){
+            sum +=arguments[i];
+       }
+       return sum;
+    }
+    var arr = [1,2,3,4,5];
+    sum.apply(null,arr);//15
+```
 
 
 > 15.函数的参数arguments
