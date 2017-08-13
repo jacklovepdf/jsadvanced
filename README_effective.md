@@ -281,8 +281,38 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 
 > 15.函数的参数arguments
 
-（1）
+（1）使用隐式的arguments对象实现可变参数的函数。
 
+（2）永远不要修改arguments对象，可以使用[].slice.call(arguments)将arguments对象复制到一个真正的数组中再进行修改；
+
+```javascript
+    function sum() {
+        console.log("arguments is a array:", Array.isArray(arguments))
+       for(var i=0, sum=0; i<arguments.length; i++){
+            sum +=arguments[i];
+       }
+       return sum;
+    }
+    sum();//arguments is a array: false;
+```
+
+（3）bind方法(es5)
+    使用bind方法提取具有确定接受者的方法；
+```javascript
+    var buffer = {
+        arr: [],
+        add: function(s) {
+          this.arr.push(s);
+        }
+    }
+    var sources=["12","jack","mike"];
+    //方法一
+    sources.forEach(function(item) {
+       buffer.add(item);//
+    })
+    //方法二
+    sources.forEach(buffer.add.bind(buffer));//buffer.add.bind(buffer)创建了一个新函数，新函数的接受者绑定到buffer对象；
+```
 > 16.不要信赖函数的toString方法
 
 
