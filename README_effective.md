@@ -341,6 +341,27 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 ## Object and Prototype
 
 > 18.对象的创建
+（1）理解prototype, getPrototypeOf 和_proto_之间的移动
+    实例化对象的时候，prototype用于创建对象的原型；
+    Object.getPrototypeOf(obj)是es5中用户获取对象原型的标准方法；
+    obj._proto_是获取对象原型的非标准方法；
+    //js中类是由一个构造函数和一个关联原型组成的设计模式；
+    
+```javascript
+    //获取对象的原型，非es5环境，es5环境用Object.getPrototypeOf
+    if(typeof Object.getPrototypeOf === "undefined"){
+        Object.getPrototypeOf = function(obj) {
+            var t = typeof obj;
+            if(obj && (t === "object" || t === "function")){
+                 return obj.__proto__;
+            }else {
+                throw new TypeError("not a object");
+            }
+        }
+    }
+```
+    
+**Note**: __proto__属性会污染所有对象，因此会导致大量的bug，应该禁止使用，同时应该禁止修改__proto__属性；
 
 > 19.原型及原型链
 
