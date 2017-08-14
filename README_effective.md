@@ -340,6 +340,12 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 
 ## Object and Prototype
 
+> 18.对象的创建
+
+> 19.原型及原型链
+
+> 20.继承
+
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
