@@ -451,7 +451,10 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
         this.age = age;
     }
     //inherit prototype property of SuperClass
-    SubClass.prototype = Object.assign({}, SuperClass.prototype);
+    // es6 Object.assign
+    // SubClass.prototype = Object.assign({}, SuperClass.prototype);
+    // es5 Object.create
+    SubClass.prototype = Object.create(SuperClass.prototype);
     SubClass.prototype.constructor = SubClass;
 
     SubClass.prototype.sayAge = function(){
