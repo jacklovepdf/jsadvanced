@@ -347,6 +347,7 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 ## Object and Prototype
 
 > 18.对象的创建
+
 （1）理解prototype, getPrototypeOf 和_proto_之间的移动
     实例化对象的时候，prototype用于创建对象的原型；
     Object.getPrototypeOf(obj)是es5中用户获取对象原型的标准方法；
@@ -389,10 +390,76 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
 **Note**: 该实现是通过方法中引用变量的方式引用age，而不是通过this属性的方式引用；并且User实例中根本不包含任何实例属性，
 因此外部变量根本不能直接访问实例中的变量；缺点是由于将方法存储在实例中，导致方法副本的扩散。
 
-> 19.原型及原型链
-（1）将方法存储原型中优于存储在实例对象中；
+（4）将方法存储原型中优于存储在实例对象中；
 
-> 20.继承
+> 19.原型及原型链（继承）
+
+（1）借用父类构造函数
+```javascript
+    function Base(age) {
+        this.age = age;
+    }
+    function SubClass(age, name) {
+        Base.call(this, age);
+        this.name = name; 
+    }
+    instance1 = new SubClass(12,"jack");
+    console.log("instance1=======>", instance1);
+```
+**Note**: 通过借用父类构造函数的方式将父类的实例属性添加到子类中；
+
+（2）引用父类的原型
+```javascript
+    //Object.create()的兼容写法
+    if(typeof Object.create === "undefined"){
+        Object.create = function(prototype) {
+            function C() {}
+            C.prototype = prototype;
+            return new C();
+        }
+    } 
+    function Base(age) {
+        this.age = age;
+    }
+    function SubClass(age, name) {
+        Base.call(this, age);
+        this.name = name; 
+    }
+    SubClass.prototype = Object.create(Base.prototype);//继承父类的原型
+```
+
+**Note**: 通过Object.create或者Object.assign创建子类的原型对象，避免调用父类的构造函数；
+
+（3）对象的创建与继承（最佳实践）
+
+```javascript
+    //基类构造函数
+    function SuperClass(name){
+            this.name = name;
+    }
+    //基类原型，原型复写的方式，需要指定constructor指向
+    SuperClass.prototype = {
+        constructor: SuperClass,
+        sayName: function(){
+            console.log(this.name);
+        }
+    };
+    //子类
+    function SubClass(name, age){
+        //constructor stealing, inherit instance property of SuperClass
+        SuperClass.call(this, name);
+        this.age = age;
+    }
+    //inherit prototype property of SuperClass
+    SubClass.prototype = Object.assign({}, SuperClass.prototype);
+    SubClass.prototype.constructor = SubClass;
+
+    SubClass.prototype.sayAge = function(){
+        console.log(this.age);
+    };
+    var SubObj = new SubClass("jacklin", 19);
+    console.log(SubObj);
+```
 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
