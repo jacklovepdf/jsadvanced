@@ -464,6 +464,25 @@ eval函数是一个难以置信强大和灵活的工具，它将其参数作为j
     console.log(SubObj);
 ```
 
+**Note**: 在继承父类的时候，不要重用父类的属性名，同时要避免继承标准类，因为继承标准类会由于一些特殊的内部属性（[[class]]）而被破坏；
+
+（4）猴子补丁
+
+```javascript
+    //给不支持Array map方法的环境提供猴子补丁
+    if(typeof Array.prototype.map !== "function"){
+        Array.prototype.map = function(callback, thisArg) {
+            var result = [];
+            for(var i=0, len=this.length; i<len; i++){
+                result[i] = callback.call(thisArg, this[i], i);
+            }
+            return result;
+        }
+    } 
+```
+
+**Note**: 给对象原型增加，删除或者修改的属性被称为猴子补丁，避免使用轻率的猴子补丁，当多个库以不兼容的方式给同一个原型打猴子补丁的时候，通常容易导致问题。
+但是通过使用猴子补丁为确定的标准api提共polyfill是可行的；
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
