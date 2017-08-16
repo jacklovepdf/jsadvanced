@@ -501,7 +501,28 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 ## Arrays and Dictionary
 
+20. 使用Object的直接实例构造轻量级的字典
 
+```javascript
+    var dict = {};
+    dict.age = 14;
+    dict.name = "jack";
+    dict.height = 120;
+    var names = [];
+    for(var item in dict){
+        names.push(item);
+    }
+    console.log("names=====>", names);//["age", "name", "height"]
+    //轻量级字典应该是Object的直接实例，以使for...in循环免收原型污染；
+```
+
+
+21. 原型污染
+
+    原型污染是指当枚举字典的条目时，原型对象中可能存在一些不期望的属性。
+    
+
+22.
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
