@@ -22,14 +22,14 @@ summary of effective javascript
 ```javascript
     "use strict"
     //...
-    function(){
+    function C(){
         //...
     }
 ```
 (2) 启用函数的严格模式
 ```javascript
     //...
-    function(){
+    function C(){
         "use strict"
         //...
     }
