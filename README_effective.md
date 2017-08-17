@@ -501,7 +501,9 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 ## Arrays and Dictionary
 
-20. 使用Object的直接实例构造轻量级的字典
+20. 字典的构建
+
+（1）使用Object的直接实例构造轻量级的
 
 ```javascript
     var dict = {};
@@ -512,17 +514,51 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     for(var item in dict){
         names.push(item);
     }
-    console.log("names=====>", names);//["age", "name", "height"]
-    //轻量级字典应该是Object的直接实例，以使for...in循环免收原型污染；
+    console.log("names=====>", names);//["age", "name", "height"];
+    Object.prototype.width = 40;
+    names = [];
+    for(var item in dict){
+        names.push(item);
+    }
+    console.log("names=====>", names);//["age", "name", "height", "width"];
+    //轻量级字典应该是Object的直接实例，以使for...in循环免收原型污染；即使这样，当库或者应用程序开发者在Object
+    //原型中增加属性的时候（虽然不建议这么做），任然会导致原型污染；
 ```
 
+（2）使用null原型防止原型污染
 
-21. 原型污染
+原型污染是指当枚举字典的条目时，原型对象中可能存在一些不期望的属性干扰程序的行为，使用Object的直接实例来构建字典能够在一定程度上减少原型污染，但还是
+无法从根本上避免原型污染，防止原型污染最简单的方式是创建一个空原型的对象。
 
-    原型污染是指当枚举字典的条目时，原型对象中可能存在一些不期望的属性。
+```javascript
+    function C() {}
+    if(typeof Object.create === "undefined"){
+        C.prototype = Object.create(null);
+    }else {
+        C.prototype = {__proto__: null}
+    }
     
+```
+    
+> **Note**: 绝对不要在在字典中使用特殊的key值"_proto_"，一些环境中会将其作为特殊的属性对待；
 
-22.
+（3）使用hasOwnProperty方法避免原型污染
+
+使用hasOwnProperty区分实例属性和原型属性来避免原型污染时，如果字典对象存储了一个同为"hasOwnProperty"的条目时，那么原型中的hasOwnProperty
+方法则无法获取。（确实有这种情况的发生，特别是当使用外部文件，网络资源以及用户输入给字典填充条目的时候，你无法控制这些来自第三方的数据。）
+这时候可以提前在任何安全的位置提取hasOwnProperty方法，然后通过call方法方式调用；
+
+```javascript
+    var hasOwn = Object.prototype.hasOwnProperty;
+    // hasOwn = {}.hasOwnProperty;
+    var dict = {};
+    dict.age = 14;
+    dict.name = "jack";
+    dict.height = 120;
+    hasOwn.call(dict, "age");//true;
+```
+
+21. 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
