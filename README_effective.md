@@ -503,7 +503,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 20. 字典的构建
 
-（1）使用Object的直接实例构造轻量级的
+（1）使用Object的直接实例构造轻量级的字典
 
 ```javascript
     var dict = {};
@@ -558,7 +558,32 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     hasOwn.call(dict, "age");//true;
 ```
 
-21. 
+（4）避免在枚举期间修改对象
+
+ECMAScript标准对并发修改在不同js环境下的行为没有明确的定义，如果枚举对象在枚举期间添加了新的属性，那么枚举期间并不能保证新添加的属性
+能给被访问。
+
+21. 数组的使用
+
+（1）使用数组而不是字典来存储有序集合
+js的对象是一个无序的属性集合，获取或者设置不同的属性以相同的效率产生结果；使用for...in循环来枚举对象属性应当与顺序无关。
+
+（2）绝对不要在Object.prototype中增加可枚举属性
+在Object.prototype原型中添加方法是非常方便的一件事情，它能使所有的对象共享这个方法；然而在Object.prototype中添加方法可能会造成原型污染，
+for...in循环行为也会收到原型污染的影响。我们可以用函数来代替Object.prototype方法或者使用es5中Object.defineProperty方法将它们定义为不可枚举属性；
+
+```javascript
+    Object.defineProperties(Object.prototype, "allKeys", {
+        value: function() {
+           var result = [];    
+        },
+        writable: true,
+        enumerable: false,
+        configurable: true
+    })
+```
+
+（3）
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
