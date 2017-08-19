@@ -560,9 +560,10 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 （4）避免在枚举期间修改对象
 
-ECMAScript标准对并发修改在不同js环境下的行为没有明确的定义，如果枚举对象在枚举期间添加了新的属性，那么枚举期间并不能保证新添加的属性
+    ECMAScript标准对并发修改在不同js环境下的行为没有明确的定义，如果枚举对象在枚举期间添加了新的属性，那么枚举期间并不能保证新添加的属性
 能给被访问。
-
+    如果对象的内容可能在循环期间被修改，应该使用while或者经典的for循环。 
+    
 21. 数组的使用
 
 （1）使用数组而不是字典来存储有序集合
@@ -583,7 +584,55 @@ for...in循环行为也会收到原型污染的影响。我们可以用函数来
     })
 ```
 
-（3）
+（3）迭代方法优于循环
+优秀的程序员讨厌编写重复代码，复制何粘贴样板代码会重复错误，使代码更难更改和难以维护；庆幸的是js的闭包是一种为这些模式建立迭代和抽象富有表现力的手法；
+可以避免我们编写重复的代码；
+ 
+ ```javascript
+    //代码重复，终止条件容易出错
+    var arr = [1,2,3];
+    for(var i=0, n=arr.length; i<n; i++){
+        arr[i]++;
+    }
+    //消除了终止条件何数组索引
+    arr.forEach(function(item) {
+        item++;
+    })
+ ```
+
+在需要提前终止循环的情况下，任然推荐使用传统的循环，另外，some和every方法也可以用于提前终止循环；
+
+（4）在类数组对象上复用通用的数组方法
+任意一个具有索引属性和恰当length属性的对象都可以使用通用的Array方法；
+常见的类数组对象有函数的隐式参数arguments,DOM的NodeList类，字符串甚至对象字面量；
+Array.prototype中通用数组方法并不是所都可以被类数组对象使用的；
+将类数组对象转换为真实数组一个简洁的方法是在类数组对象上调用slice方法；
+
+ ```javascript
+    function f() {
+        var sum = 0;
+        [].map.call(arguments, function(item) {
+            sum = sum + item;
+        });
+        var argArr = [].slice.call(arguments)
+        console.log("argArr is array:", Array.isArray(argArr)); // true
+        return sum;
+    }
+    f(1,2,3);// 6
+ ```
+
+（5）使用数组字面量优于数组方法
+与数组字面量相比，使用构造函数会有一些常见的问题，比如没有人重新包装过全局的Array变量，以及单个数字数组通过Array构造函数来实例的时候
+会出现完全不同的行为，正因为有这些不一致的行为，使用数组字面量是一种更规范，更一致的语义。
+
+ ```javascript
+    //good
+    var arr = [1,2,3];
+    //not very good
+    var a = new Array(1,2,3)
+    //bad, 定义一个数组长度为3的空数组，而不是数组长度为1值为3的数组
+    var m = new Array(3);
+ ```
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
