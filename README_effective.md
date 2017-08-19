@@ -638,6 +638,12 @@ Array.prototype中通用数组方法并不是所都可以被类数组对象使�
 
 ## Library and API Design
 
+22.保持一致的约定
+设计良好的api能够清楚、简洁和明确表达自己的程序；对于api的用户来说，所使用的命名何函数签名最能给产生普遍影响的决策；
+
+23.关于API参数的约定
+（1）将undefined看做"没有值"
+
 
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
