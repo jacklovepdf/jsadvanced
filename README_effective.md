@@ -690,7 +690,34 @@ api可以被分为两种，有状态和无状态，无状态的api提供的函�
 和使用，且不容易出错。因此，尽可能的设计无状态的api, 如果api是有状态的，标出每个操作与那些状态有关。
 
 24.支持方法链
-使用方法链来连接无状态的操作，通过在无状态的方法中返回新对象来支持方法链；
+使用方法链来连接无状态的操作，通过在无状态的方法中返回新对象来支持方法链；在有状态的方法中返回this来支持方法链；
+
+ ```javascript
+    var records = [
+        {user:"jack",age: 19},
+        {user:"",age: 20},
+        {user:"MIKE",age: 21},
+    ];
+    var users =records.map(function(item) {
+        return item.user;
+    }).filter(function(user) {
+        return !!user
+    }).map(function(user) {
+        return user.toLowerCase();
+    })
+    console.log("users=====>", users);//["jack", "mike"]
+    
+    //jquery中的链式调用
+    $("#notification")
+        .html("aaaa") // 有状态
+        .removeClass("info")// 有状态
+        .addClass("error")// 有状态
+        
+    var ele = $("#notification");
+    ele.html("aaa");
+    ele.removeClass("info");
+    ele.addClass("error");
+ ```
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
