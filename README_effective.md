@@ -667,11 +667,30 @@ Array.prototype中通用数组方法并不是所都可以被类数组对象使�
     }
  ```
 
+（3）区分数组类型参数和类数组类型参数
+绝不重载与其它类型有重叠的结构类型，当重载一个结构类型与其它类型时，先测试其它类型；使用es5提供的Array.isArray方法测试真数组；
+
+ ```javascript
+    // test arr is array
+    // bad
+    arr.length
+    // better
+    arr instanceof Array
+    // best
+    Array.isArray(arr) //es5
+    var toString = {}.toString();
+    toString.call(arr) === "[object Array]" // less than es5
+ ```
+ 
+ (4)避免过度的强制类型转换
+ 特别地，在那些使用参数类型来决定重载函数行为的函数中，应该尽量避免强制类型转换；同时可以采用防御性的编程手段，对非预期输入就行处理；
+ 
 23.避免不必要的状态
 api可以被分为两种，有状态和无状态，无状态的api提供的函数或者方法只取决于输入，而与状态无关。虽然有状态有时候是必须的，但无状态的api更容易学习
 和使用，且不容易出错。因此，尽可能的设计无状态的api, 如果api是有状态的，标出每个操作与那些状态有关。
 
-
+24.支持方法链
+使用方法链来连接无状态的操作，通过在无状态的方法中返回新对象来支持方法链；
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
