@@ -734,6 +734,143 @@ js有时候被称为提供一个运行到完成机制的担保，也就是说任
 
 (1) 在异步序列中使用嵌套或者命名的回调函数
 
+ ```javascript
+    downloadAsyc("file.txt", function(file) {
+        console.log("finished");
+    });
+    console.log("starting");
+   //运行到完成机制会确保"starting"一定会在"finished"前被打印；
+   "starting";
+   "finished"
+ ```
+ 
+```javascript
+    db.lookupAsync("url", downloadURL);
+    function downloadURL(url){
+        downloadAsync(url, showContents.bind(null, url));
+    }
+    function showContents(url, text) {
+        console.log("contents of " + url + ":" + text);
+    }
+```
+> **Note**: 通过嵌套来实现异步操作会导致回调地狱，可以通过综合使用嵌套和命名函数减少过多的回调函数嵌套；
+ 
+ （2）不要在计算时阻塞事件
+    为了保持客户端应用程序保持高度可交互性以及传入服务器应用程序的请求都能得到充分的服务，保持事件循环的每个轮次尽可能短是至关重要的；
+  否则事件队列可能会滞销，其增长速度会超过分发处理事件处理程序的速度；因此一些代价高昂的计算可能导致糟糕的用户体验；一些通用的解决方案有：
+  （1）使用浏览器中Worker API这样的并发机制
+  （2）将计算进行分解为多个步骤，每个步骤组成一个可管理的工作块；（将计算分解到事件循环的多个轮次中）
+```javascript
+    function search(other ,callback) {
+        var visted = {};
+        var worklist = [this];
+        function next() {
+            for(var i=0; i<10; i++){
+               //...
+            }
+            setTimeout(next,0);// the next iteration
+        };
+        // ...
+        setTimeout(next,0);// the first iteration
+    }
+```
 
+ > **Note**: 对于循环的迭代，我们编写一个局部的next函数，该函数执行循环中单个迭代，然后调度应用程序事件队列来异步运行下一次迭代；
+ 这样使得在此期间发生的其它的事件能够被处理，然后才执行一次迭代；
+
+（3）绝不要同步的调用异步的回调函数；
+总是异步的调用回调函数，同步的调用异步回调函数扰乱了预期的操作顺序，可能导致意想不到的bug，同时同步调用异步回调函数可能导致栈移除；
+使用异步api，例如setTimeout来调度异步回调函数，使其运行于事件循环的另一个回合；
+
+```javascript
+    var cache = new Dict();
+    function downloadURL(url, sunccess, failure){ 
+    "use strict";
+        if(cache.has(url)){
+            var cached = cached.get(url);
+            setTimeout(sunccess.bind(null, cached));
+            return;
+        }
+        return downloadAsync(url, function(file) {
+            cache.set(url, file);
+            suncces(file);
+        }, failure);
+    }
+```
+
+（4）promise
+
+27.当心丢弃错误
+通过编写共享的错误处理函数来避免复制和粘贴错误处理代码；确保明确的处理了所有的错误条件以避免丢弃错误；
+
+（1）同步代码中的异常处理
+```javascript
+    try {
+        f();
+        g();
+    }catch (e){
+        //handle any error
+    }
+```
+
+（2）异步代码中错误处理
+异步api倾向于将错误表示为回调函数的特定参数或者一个附加的错误处理回调函数；
+ ```javascript
+    // 附加的错误处理回调函数
+    downloadAsyc("file.txt", function(file) {
+        console.log("finished");
+    }, function(err) {
+        console.log("err====>", err);
+    });
+    
+    // 回调函数的特定参数--nodejs中错误处理常用的手段
+    downloadAsyc("file.txt", function(err, file) {
+        if(err){
+            console.log("err====>", err);
+            return;
+        }
+        console.log("finished");
+    });
+ ```
+ 
+ 28.对异步循环使用递归
+ 
+ ```javascript
+    function dowloadOneAsync(urls, onSuccess, onfailure) {
+        var len = urls.length;
+        function tryNextURL(index) {
+            if(index >= len){
+                onfailure("all downloads failed");
+                return;
+            }
+            downloadAsync(urls[index], onSuccess, function () {
+                tryNextURL(index + 1);
+            })
+        };
+        tryNextURL(0);
+    }
+ ```
+ 
+ > **Note**: 当一个程序执行的时候有太多的函数调用，它会耗尽栈空间，最终抛出异常；
+
+29. 使用计数器来执行并行操作；
+
+js中应用程序的事件发生顺序是不确定的，即顺序不可预测的；使用计数器避免并行操作中数据竞争；
+
+ ```javascript
+    function dowloadOneAsync(urls, onSuccess, onfailure) {
+        var len = urls.length;
+        var result = [];
+        urls.forEach(function(url, i) {
+            dowloadAsync(url, function(text) {
+                result[i] =result;
+                len--; //使用计数器避免并行操作中数据竞争；
+                if(len === 0){
+                    onSuccess(result);
+                }
+            }, onfailure(err))
+        })
+    }
+ ```
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
