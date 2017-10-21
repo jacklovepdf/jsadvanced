@@ -153,10 +153,9 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     
  ```
 
+3. 使用JSON.parse(JSON.stringify(a))来实现引用类型的深度复制
 
- 使用JSON.parse(JSON.stringify(a))来实现引用类型的深度复制
-
-<img src="./images/jsonTransfer.png" height="300">
+<img src="./images/jsonTransfer.png" width="400">
 
 
 ## Destructuring
