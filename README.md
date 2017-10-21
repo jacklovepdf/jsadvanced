@@ -9,6 +9,7 @@ of course, we cannot miss graph and demos to demonstrate!
 - [Es6 Generator](#es6-generator)
 - [Prototype Inherit](#prototype-inherit)
 - [Variables Declaration](#variables-declaration)
+- [Value Types and Reference Types](#variables-declaration)
 - [Destructuring](#destructuring)
 - [Function](#function)
 - [This](#this)
@@ -109,6 +110,55 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
     // 常量对象的属性是可以重写的
     myObj.key = "otherValue";
 ```
+
+
+## Value Types and Reference Types
+
+    引用类型使用的时候需要特别注意，如果一个全局引用类型在多个功能函数或者模块中使用, 特别需要注意当给全局引用类型复制给新参的时候，
+    在功能函数或者模块内部修改形参（写操作）。
+    
+* 值类型
+ ```javascript
+      var a = 1;
+      var b = a;
+      console.log("b====>", b)// 1
+ ```
+* 引用类型
+
+1. console打印引用类型
+
+ ```javascript
+      var a = {name: "jack"};
+      console.log("a========>",a);
+      // {name: "mike"}
+      var b = a;
+      b.name = "mike";
+      console.log("b====>", b);
+      // {name: "mike"}
+ ```
+
+2. 引用类型作为实参传给功能函数（模块）,注意引用类型的写操作；
+
+ ```javascript
+    var person = {name: "jack", age: 19};
+    
+    function updateName(person,name) {
+        person.name = name;
+    }
+    
+    function updateAge(person,age) {
+        person.age = age;
+    }
+    
+    updateName(person, "mike");
+    
+ ```
+
+
+ 使用JSON.parse(JSON.stringify(a))来实现引用类型的深度复制
+
+<img src="./images/jsonTransfer.png" height="300">
+
 
 ## Destructuring
 * object destructuring
