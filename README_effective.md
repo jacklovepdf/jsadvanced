@@ -734,6 +734,7 @@ js作为一中嵌入式脚本语言，不是作为独立的应用程序运行，
 这些事件可能在web应用程序的生命周期的任何时刻发生，甚至同时发生；js通过使用一个简单的执行模型（事件队列火事件循环并发）和异步api来实现并发；
 
 25.并发模型和事件循环
+
     In the JSAPI, JSRuntime is the top-level object that represents an instance of the JavaScript engine. 
 A program typically has only one JSRuntime, even if it has many threads. 
 The JSRuntime is the universe in which JavaScript objects live; they can't travel to other JSRuntimes.
