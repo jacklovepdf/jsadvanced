@@ -733,9 +733,38 @@ js作为一中嵌入式脚本语言，不是作为独立的应用程序运行，
 一个浏览器可能打开多个窗口和标签运行多个web应用程序，每个应用程序响应不同的输入源（用户的键盘，鼠标，网络到达的数据，定时报警等等）；
 这些事件可能在web应用程序的生命周期的任何时刻发生，甚至同时发生；js通过使用一个简单的执行模型（事件队列火事件循环并发）和异步api来实现并发；
 
-25.不要阻塞io事件队列
+25.并发模型和事件循环
+    In the JSAPI, JSRuntime is the top-level object that represents an instance of the JavaScript engine. 
+A program typically has only one JSRuntime, even if it has many threads. 
+The JSRuntime is the universe in which JavaScript objects live; they can't travel to other JSRuntimes.
+
+<img src="https://mdn.mozillademos.org/files/4617/default.svg" height="300">
+
+(1)stack
+函数调用形成了一个栈帧。
+
+(2)heap
+对象被分配在一个堆中，即用以表示一个大部分非结构化的内存区域。
+
+(3)queue
+一个 JavaScript 运行时包含了一个待处理的消息队列。每一个消息都与一个函数相关联。
+当栈拥有足够内存时，从队列中取出一个消息进行处理。这个处理过程包含了调用与这个消息相关联的函数（以及因而创建了一个初始堆栈帧）。当栈再次为空的时候，也就意味着消息处理结束。
+
+(4)执行到完成
+每一个消息完整的执行后，其它消息才会被执行。
+
+(5)添加消息
+在浏览器里，当一个事件出现且有一个事件监听器被绑定时，消息会被随时添加。如果没有事件监听器，事件会丢失。所以点击一个附带点击事件处理函数的元素会添加一个消息。其它事件亦然。
+调用 setTimeout 函数会在一个时间段过去后在队列中添加一个消息。这个时间段作为函数的第二个参数被传入。如果队列中没有其它消息，消息会被马上处理。
+但是，如果有其它消息，setTimeout消息必须等待其它消息处理完。因此第二个参数仅仅表示最少的时间 而非确切的时间。
+
+(6)不要阻塞io事件队列
 js有时候被称为提供一个运行到完成机制的担保，也就是说任何当前运行于共享上下文的用户代码（比如在浏览器中的单个web页面或者单个运行的web服务器实例），
 只能在执行完成之后才能调用下一个事件处理程序；
+
+(7)多个运行时互相通信
+一个 web worker 或者一个跨域的iframe都有自己的栈，堆和消息队列。两个不同的运行时只能通过 postMessage方法进行通信。
+如果后者侦听到message事件，则此方法会向其他运行时添加消息。
 
 26.异步api
 
