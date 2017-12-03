@@ -735,9 +735,7 @@ js作为一中嵌入式脚本语言，不是作为独立的应用程序运行，
 
 25.并发模型和事件循环
 
-    In the JSAPI, JSRuntime is the top-level object that represents an instance of the JavaScript engine. 
-A program typically has only one JSRuntime, even if it has many threads. 
-The JSRuntime is the universe in which JavaScript objects live; they can't travel to other JSRuntimes.
+   In the JSAPI, JSRuntime is the top-level object that represents an instance of the JavaScript engine. A program typically has only one JSRuntime, even if it has many threads. The JSRuntime is the universe in which JavaScript objects live; they can't travel to other JSRuntimes.
 
 <img src="https://mdn.mozillademos.org/files/4617/default.svg" height="300">
 
