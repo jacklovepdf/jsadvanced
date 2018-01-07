@@ -1,0 +1,29 @@
+{
+  "name": "jsadvanced",
+  "version": "1.0.0",
+  "description": "some tips and demo to use js",
+  "main": "index",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacklovepdf/jsadvanced.git"
+  },
+  "keywords": [
+    "es6",
+    "webpack",
+    "jsadvanced",
+    "babel"
+  ],
+  "author": "jacklovepdf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacklovepdf/jsadvanced/issues"
+  },
+  "homepage": "https://github.com/jacklovepdf/jsadvanced#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "html-webpack-plugin": "^2.30.1"
+  }
+}

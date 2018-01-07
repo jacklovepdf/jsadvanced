@@ -16,6 +16,7 @@ of course, we cannot miss graph and demos to demonstrate!
 - [This](#this)
 - [Symbols](#symbols)
 - [Proxy and Reflect](#proxy-and-reflect)
+- [Decorator](#decorator)
 
 ## Process control statements loop
 
@@ -599,3 +600,8 @@ ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函�
 ```
 
 ## Symbols
+
+
+## Decorator
+
+
