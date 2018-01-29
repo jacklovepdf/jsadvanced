@@ -7,7 +7,7 @@ of course, we cannot miss graph and demos to demonstrate!
 
 - [Process control statements loop](#process-control-statements-loop)
 - [Es6 Generator](#es6-generator)
-- [Prototype Inherit](#prototype-inherit)
+- [Prototype Inherit and class](#prototype-inherit)
 - [Variables Declaration](#variables-declaration)
 - [Value Types and Reference Types](#value-reference-type)
 - [Modules](#modules)
@@ -28,9 +28,9 @@ how to use loop statement more efficiently.
 
 ```
 
-## Prototype Inherit
+## Prototype Inherit and class
 
-combination inheritance(compose constructor stealing and prototype chain)
+1.combination inheritance(compose constructor stealing and prototype chain)
 ```javascript
     function SuperClass(name){
         this.name = name;
@@ -54,7 +54,7 @@ combination inheritance(compose constructor stealing and prototype chain)
 ```
 <img src="./images/composite.png" height="300">
 
-寄生组合继承模式
+2.寄生组合继承模式
 ```javascript
     function SuperClass(name){
         this.name = name;
@@ -81,6 +81,33 @@ combination inheritance(compose constructor stealing and prototype chain)
     console.log(SubObj);
 ```
 <img src="./images/parasitic.png" height="300">
+
+3. es6 class
+```javascript
+    function SuperClass(name){
+        this.name = name;
+    }
+    SuperClass.prototype = {
+        constructor: SuperClass,
+        sayName: function(){
+            console.log(this.name);
+        }
+    };
+    function SubClass(name, age){
+        //constructor stealing, inherit instance property of SuperClass
+        SuperClass.call(this, name);
+        this.age = age;
+    }
+    //inherit prototype property of SuperClass
+    SubClass.prototype = Object.assign({}, SuperClass.prototype);
+    SubClass.prototype.constructor = SubClass;
+
+    SubClass.prototype.sayAge = function(){
+        console.log(this.age);
+    };
+    var SubObj = new SubClass("jacklin", 19);
+    console.log(SubObj);
+```
 
 ## Variables Declaration
 * var
