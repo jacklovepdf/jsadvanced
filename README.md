@@ -83,30 +83,11 @@ how to use loop statement more efficiently.
 <img src="./images/parasitic.png" height="300">
 
 3. es6 class
-```javascript
-    function SuperClass(name){
-        this.name = name;
-    }
-    SuperClass.prototype = {
-        constructor: SuperClass,
-        sayName: function(){
-            console.log(this.name);
-        }
-    };
-    function SubClass(name, age){
-        //constructor stealing, inherit instance property of SuperClass
-        SuperClass.call(this, name);
-        this.age = age;
-    }
-    //inherit prototype property of SuperClass
-    SubClass.prototype = Object.assign({}, SuperClass.prototype);
-    SubClass.prototype.constructor = SubClass;
 
-    SubClass.prototype.sayAge = function(){
-        console.log(this.age);
-    };
-    var SubObj = new SubClass("jacklin", 19);
-    console.log(SubObj);
+    a very good document: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+    
+```javascript
+    
 ```
 
 ## Variables Declaration
