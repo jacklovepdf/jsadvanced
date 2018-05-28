@@ -8,8 +8,14 @@ const sendMsg = [
     "message4",
     "message5"
 ]
+// setTimeout(function () {
+//
+//     }, 200);
+
 ws.on('open', function open() {
+    console.log("open");
     sendMsg.forEach(function (item) {
         ws.send(item);
     });
 });
+

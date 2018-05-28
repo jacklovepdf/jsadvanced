@@ -17,6 +17,7 @@ of course, we cannot miss graph and demos to demonstrate!
 - [WebSocket](#websocket)
 - [Watcher](#watcher)
 - [SourceMap](#SourceMap)
+- [Throttle and Debounce](#throttle-and-debounce)
 - [Async and await](#async-and-await)
 - [Symbols](#symbols)
 - [Proxy and Reflect](#proxy-and-reflect)
@@ -616,11 +617,80 @@ ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函�
 
 
 ## Watcher(eg. watcher)
-
+    详见demo-watcher,基于chokidar来实现的；
 
 ## SourceMap(eg. source-map)
+    shttps://github.com/mozilla/source-map
 
+## Throttle and Debounce
+    函数去抖以及函数节流，函数节流和消抖的本质都是控制函数（实际场景中通常是事件的回调函数）的执行次数，不同点在于函数去抖是控制函数在一次操作中只执行一次(且为最后一次)；
+而定义这一次操作通常是通过单位时间来定义（eg，定时器的设定时间内的行为称为一次操作）；
 
+```javascript
+    //函数去抖
+    function debounce(func, wait) {
+        let timer = null;
+        return function () {
+            let context = this; //函数执行上下文；
+            let args = arguments; //获取函数的参数；
+
+            if(timer){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(function () {
+                func.apply(context, args);
+            }, wait)
+        }
+    }
+```
+
+    函数节流是指降低函数的执行频率，通常有两种实现方式，其一用时间戳来判断是否已到回调该执行时间，记录上次执行的时间戳，然后每次触发scroll事件执行回调，
+    回调中判断当前时间戳距离上次执行时间戳的间隔是否已经到达 1000ms，如果是，则执行，并更新上次执行的时间戳，如此循环；
+    第二种方法是使用定时器，比如当 scroll 事件刚触发时，打印一个 hello world，然后设置个 1000ms 的定时器，此后每次触发 scroll 事件触发回调，
+    如果已经存在定时器，则回调不执行方法，直到定时器触发，handler 被清除，然后重新设置定时器。
+
+```javascript
+    //函数节流
+_.throttle = function(func, wait, options) {
+  var context, args, result;
+  var timeout = null;
+  var previous = 0;
+  if (!options)
+    options = {};
+
+  var later = function() {
+    previous = options.leading === false ? 0 : _.now();
+    timeout = null;
+    result = func.apply(context, args);
+    if (!timeout)
+      context = args = null;
+  };
+  return function() {
+    var now = _.now();
+    if (!previous && options.leading === false)
+      previous = now;
+
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0 || remaining > wait) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+
+      previous = now;
+      result = func.apply(context, args);
+
+      if (!timeout)
+        context = args = null;
+    } else if (!timeout && options.trailing !== false) { // 最后一次需要触发的情况
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+};
+```
 ## Async and await
 
 ## Symbols

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>debounce demo test</title>
+    <script src="debounce.js"></script>
+</head>
+<body>
+    <div id="win_area"></div>
+    <script>
+        var showWin = document.getElementById('win_area');
+        var debounce_cb = debounce(cb, 500);
+        function cb() {
+            showWin.innerText = outerHeight * outerWidth; //计算浏览器窗口的面积；
+        }
+        window.onresize = debounce_cb;
+    </script>
+</body>
+</html>
