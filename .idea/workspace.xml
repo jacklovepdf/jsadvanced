@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f910b6cf-258f-4964-98b2-b67f833f9567" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/README_webapi.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_es6.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_webapi.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_webapi.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/source-map" beforeDir="false" afterPath="$PROJECT_DIR$/src/source-map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/watcher/chokidar-demo" beforeDir="false" afterPath="$PROJECT_DIR$/src/watcher/chokidar-demo" afterDir="false" />
     </list>
@@ -32,8 +30,8 @@
       <file leaf-file-name="README_webapi.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README_webapi.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state relative-caret-position="302">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -157,7 +155,7 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
+    <option name="x" value="-83" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="761" />
@@ -220,15 +218,15 @@
       <workItem from="1526723397479" duration="556000" />
       <workItem from="1527347793889" duration="7290000" />
       <workItem from="1530193210007" duration="17000" />
-      <workItem from="1531399490962" duration="3654000" />
+      <workItem from="1531399490962" duration="5954000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19669000" />
+    <option name="totallyTimeSpent" value="21969000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="23" width="1440" height="761" extended-state="0" />
+    <frame x="-83" y="23" width="1440" height="761" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
@@ -610,8 +608,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README_webapi.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        <state relative-caret-position="302">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
