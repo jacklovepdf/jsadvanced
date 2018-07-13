@@ -29,7 +29,7 @@
 
     (3)事件
     popstate： 每次历史会话发生改变的时候popstate事件会被派发到Windows窗口，如果历史会话的变化是由pushState或者replaceState激活的，popstate事件对象的state属性会携带历史会话状态对象的副本；
-
+    注意目前发现popstate事件只有history.back方法会触发；
 1.3 关于Navigator
 
 
