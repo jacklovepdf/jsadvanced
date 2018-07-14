@@ -53,50 +53,50 @@
     对于单页应用来说，hash路由页面路由常用解决方案（当然history api也很常用），对于当前主流的前端框架来说，都提供了现成的方案来帮开发者做这件事；
 下面是一个简单的实现；
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>router</title>
-</head>
-<body>
-<ul>
-    <li><a href="#/">mine</a></li>
-    <li><a href="#/blue">detail</a></li>
-    <li><a href="#/green">search</a></li>
-</ul>
-<script>
-    function Router() {
-        this.routes = {};
-        this.currentUrl = '';
-    }
-    Router.prototype.route = function(path, callback) {
-        this.routes[path] = callback || function(){};
-    };
-    Router.prototype.refresh = function() {
-        this.currentUrl = location.hash.slice(1) || '/';
-        this.routes[this.currentUrl]();
-    };
-    Router.prototype.init = function() {
-        window.addEventListener('load', this.refresh.bind(this), false);
-        window.addEventListener('hashchange', this.refresh.bind(this), false);
-    };
-    window.Router = new Router();
-    window.Router.init();
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>router</title>
+    </head>
+    <body>
+    <ul>
+        <li><a href="#/">mine</a></li>
+        <li><a href="#/blue">detail</a></li>
+        <li><a href="#/green">search</a></li>
+    </ul>
+    <script>
+        function Router() {
+            this.routes = {};
+            this.currentUrl = '';
+        }
+        Router.prototype.route = function(path, callback) {
+            this.routes[path] = callback || function(){};
+        };
+        Router.prototype.refresh = function() {
+            this.currentUrl = location.hash.slice(1) || '/';
+            this.routes[this.currentUrl]();
+        };
+        Router.prototype.init = function() {
+            window.addEventListener('load', this.refresh.bind(this), false);
+            window.addEventListener('hashchange', this.refresh.bind(this), false);
+        };
+        window.Router = new Router();
+        window.Router.init();
 
-    // register router
-    Router.route('/', function() {
-        // do sth
-    });
-    Router.route('/blue', function() {
-        // do sth
-    });
-    Router.route('/green', function() {
-        // do sth
-    });
-</script>
-</body>
-</html>
+        // register router
+        Router.route('/', function() {
+            // do sth
+        });
+        Router.route('/blue', function() {
+            // do sth
+        });
+        Router.route('/green', function() {
+            // do sth
+        });
+    </script>
+    </body>
+    </html>
 ```
 
 
