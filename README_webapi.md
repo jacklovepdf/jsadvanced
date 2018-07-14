@@ -30,12 +30,74 @@
     (3)事件
     popstate： 每次历史会话发生改变的时候popstate事件会被派发到Windows窗口，如果历史会话的变化是由pushState或者replaceState激活的，popstate事件对象的state属性会携带历史会话状态对象的副本；
     注意目前发现popstate事件只有history.back方法会触发；
+
+
 1.3 关于Navigator
+    window.navigator接口用于表示用户代理（主要是浏览器和客户端）的状态和特性
 
+    (1) 属性（这里只列出标准属性，不包括实验属性,使用之前进行特性测试，防止某些浏览器不支持）
+    battery: 返回一个电池管理对象，对象包含充电状态的字段；
+    cookieEnabled：是否启用cookie；
+    geolocation: 获取设备的地理位置；
+    hardwareConcurrency: 返回逻辑处理器的核数；
+    onLine：返回当前用户代理是否在线；
+    userAgent: 返回当前用户代理名字字符串;
+    storage: 返回单例StorageManager对象，为当前站点或者app提供访问浏览器存储的能力；
+    serviceWorker: 返回当前页面的ServiceWorkerContainer对象, 用于注册，移除，升级以及与ServiceWorker通信;
+    oscpu: 返回当前操作系统
 
+   （2）方法
+    vibrate(time): Causes vibration on devices with support for it
 
 1.4 关于hash
+    对于单页应用来说，hash路由页面路由常用解决方案（当然history api也很常用），对于当前主流的前端框架来说，都提供了现成的方案来帮开发者做这件事；
+下面是一个简单的实现；
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>router</title>
+</head>
+<body>
+<ul>
+    <li><a href="#/">mine</a></li>
+    <li><a href="#/blue">detail</a></li>
+    <li><a href="#/green">search</a></li>
+</ul>
+<script>
+    function Router() {
+        this.routes = {};
+        this.currentUrl = '';
+    }
+    Router.prototype.route = function(path, callback) {
+        this.routes[path] = callback || function(){};
+    };
+    Router.prototype.refresh = function() {
+        this.currentUrl = location.hash.slice(1) || '/';
+        this.routes[this.currentUrl]();
+    };
+    Router.prototype.init = function() {
+        window.addEventListener('load', this.refresh.bind(this), false);
+        window.addEventListener('hashchange', this.refresh.bind(this), false);
+    };
+    window.Router = new Router();
+    window.Router.init();
 
+    // register router
+    Router.route('/', function() {
+        // do sth
+    });
+    Router.route('/blue', function() {
+        // do sth
+    });
+    Router.route('/green', function() {
+        // do sth
+    });
+</script>
+</body>
+</html>
+```
 
 
 
