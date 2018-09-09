@@ -67,7 +67,6 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 
 （1）基本数据类型判断
 
-```javascript
     | type      | value of typeof | way                                                                                |
     | --------- | --------------- | ---------------------------------------------------------------------------------- |
     | null      | "object"        | null === value                                                                     |
@@ -78,7 +77,6 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
     | object    | "object"        | typeof value === "object"                                                          |
     | array     | "object"        | Object.prototype.toString.call(value) === '[object Array]' or Array.isArray(value) |
     | function  | "function"      | typeof value === "function"                                                        |
-```
 
 （2）算数运算
 
@@ -362,7 +360,13 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     //函数柯里化，将函数与其参数的一个子集绑定的技术称为函数柯里化；
     //simpleUrl.bind除了绑定接受者参数的其余参数和提供给新函数的所有参数共同组成了传递给simpleUrl函数的参数；
 ```    
+（4）函数参数的数量
+    函数有一个属性length来表明函数参数数量，这个属性常在一些流行的框架中用于根据参数数量不同来提供不同的功能；
 
+```javascript
+    function func(a, b, c){}
+    func.length ===  3;
+```
 16.不要信赖函数的toString方法；
 
 17.避免使用非标准的栈检查属性；
