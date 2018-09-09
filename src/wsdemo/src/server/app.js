@@ -7,6 +7,8 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         console.log("receive message from client");
         console.log('received: %s', message);
+        ws.send('i am from websocket server');
+
     });
     console.log("send message to client");
     ws.send('something');

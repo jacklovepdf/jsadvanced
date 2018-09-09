@@ -65,7 +65,19 @@ summary of effective javascript
 
 javascript中提供了6中数据类型，包括5中简单数据类型（或者称基本数据类型）(null、undefined、boolean、string以及number)和1中复杂数据类型object.
 
-（1）算数运算
+（1）数据类型判断
+    type | value of typeof | way
+    ---- | --- | ----
+    null | "object" | null === value
+    undefined | "undefined" | typeof value === "undefined"
+    boolean | "boolean" | typeof value === "boolean"
+    string | "string" | typeof value === "string"
+    number | "number" | typeof value === "number"
+    object | "object" | typeof value === "object"
+    array | "object" | Object.prototype.toString.call(value) === '[object Array]' or Array.isArray(value)
+    function | "function" | typeof value === "function"
+
+（2）算数运算
 
 计算之前算术运算会尝试把操作数转化为数字类型，'＋'运算浮除外；
 
@@ -82,10 +94,10 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
     1 + {valueOf: function(){return 3;}} = 4;
 ```
 
-（2）位运算
+（3）位运算
 计算之前算术运算会尝试把操作数转化为32位整数类型；
 
-（3）＋运算符
+（4）＋运算符
 ＋运算符既重载了数字相加，又重载了字符串连接操作，当＋运算符两个操作数一个为字符串一个为数字类型时，＋运算符更偏爱进行字符串连接操作；
 ```javascript
     number(0) -------------> "0"
@@ -100,10 +112,10 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
     "aaa" + {toString: function(){return "bbb";}} = "aaabbb";
 ```
 
-（4）真值运算（if || &&）
+（5）真值运算（if || &&）
 js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
 
-（5）关系运算
+（6）关系运算
 ```javascript
     1、==运算浮
     null  == undefined                      true
