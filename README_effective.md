@@ -68,7 +68,7 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 （1）基本数据类型判断
 
     type | value of typeof | way
-    ---- | --- | ----
+    --------- | ------------ | ---------------------------------------------------------------------------
     null | "object" | null === value
     undefined | "undefined" | typeof value === "undefined"
     boolean | "boolean" | typeof value === "boolean"
