@@ -67,6 +67,7 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 
 （1）基本数据类型判断
 
+```javascript
     | type      | value of typeof | way                                                                                |
     | --------- | --------------- | ---------------------------------------------------------------------------------- |
     | null      | "object"        | null === value                                                                     |
@@ -77,6 +78,7 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
     | object    | "object"        | typeof value === "object"                                                          |
     | array     | "object"        | Object.prototype.toString.call(value) === '[object Array]' or Array.isArray(value) |
     | function  | "function"      | typeof value === "function"                                                        |
+```
 
 （2）算数运算
 
