@@ -66,6 +66,7 @@ summary of effective javascript
 javascript中提供了6中数据类型，包括5中简单数据类型（或者称基本数据类型）(null、undefined、boolean、string以及number)和1中复杂数据类型object.
 
 （1）基本数据类型判断
+
     type | value of typeof | way
     ---- | --- | ----
     null | "object" | null === value

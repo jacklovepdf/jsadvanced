@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f910b6cf-258f-4964-98b2-b67f833f9567" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/source-map" beforeDir="false" afterPath="$PROJECT_DIR$/src/source-map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/watcher/chokidar-demo" beforeDir="false" afterPath="$PROJECT_DIR$/src/watcher/chokidar-demo" afterDir="false" />
     </list>
@@ -26,11 +28,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README_effective.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README_effective.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README_effective.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="67">
               <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -68,7 +79,7 @@
       <find>args</find>
       <find>accustoming-yourself-to-javascript</find>
       <find>variable-scope</find>
-      <find>Accustoming Yourself to Javascript</find>
+      <find />
       <find>类型</find>
     </findStrings>
   </component>
@@ -84,13 +95,13 @@
         <option value="$PROJECT_DIR$/src/wsdemo/src/server/clientserver.js" />
         <option value="$PROJECT_DIR$/src/debounce-throttle/debounce.js" />
         <option value="$PROJECT_DIR$/src/debounce-throttle/index.html" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/debounce-throttle/throttle.js" />
         <option value="$PROJECT_DIR$/src/router/src/router.js" />
         <option value="$PROJECT_DIR$/src/router/index.html" />
         <option value="$PROJECT_DIR$/README_webapi.md" />
         <option value="$PROJECT_DIR$/src/wsdemo/src/server/app.js" />
         <option value="$PROJECT_DIR$/README_effective.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -116,7 +127,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="75" />
+    <option name="x" value="36" />
+    <option name="y" value="139" />
     <option name="width" value="1440" />
     <option name="height" value="761" />
   </component>
@@ -132,17 +144,6 @@
             <path>
               <item name="jsadvanced" type="b2602c69:ProjectViewProjectNode" />
               <item name="jsadvanced" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jsadvanced" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jsadvanced" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jsadvanced" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jsadvanced" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="debounce-throttle" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -203,17 +204,17 @@
       <workItem from="1535721207135" duration="1456000" />
       <workItem from="1535981812362" duration="655000" />
       <workItem from="1536198695737" duration="1160000" />
-      <workItem from="1536485962868" duration="2222000" />
+      <workItem from="1536485962868" duration="2603000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42466000" />
+    <option name="totallyTimeSpent" value="42847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="75" width="1440" height="761" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -221,7 +222,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.4186747" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.4186747" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -240,13 +241,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README_es6.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10440">
-          <caret line="696" lean-forward="true" selection-start-line="696" selection-end-line="696" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/debounce-throttle/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -594,6 +588,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="67">
           <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
