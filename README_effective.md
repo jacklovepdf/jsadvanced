@@ -789,6 +789,9 @@ js有时候被称为提供一个运行到完成机制的担保，也就是说任
 一个 web worker 或者一个跨域的iframe都有自己的栈，堆和消息队列。两个不同的运行时只能通过 postMessage方法进行通信。
 如果后者侦听到message事件，则此方法会向其他运行时添加消息。
 
+(8)web渲染一帧的需要执行的任务
+macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等） ->渲染
+
 26.异步api
 
 (1) 在异步序列中使用嵌套或者命名的回调函数

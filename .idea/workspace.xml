@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f910b6cf-258f-4964-98b2-b67f833f9567" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README_effective.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_effective.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/source-map" beforeDir="false" afterPath="$PROJECT_DIR$/src/source-map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/watcher/chokidar-demo" beforeDir="false" afterPath="$PROJECT_DIR$/src/watcher/chokidar-demo" afterDir="false" />
     </list>
@@ -30,8 +30,8 @@
       <file leaf-file-name="README_effective.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README_effective.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="211">
+              <caret line="212" column="24" lean-forward="true" selection-start-line="212" selection-start-column="24" selection-end-line="212" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -80,6 +80,8 @@
       <find>variable-scope</find>
       <find>Accustoming Yourself to Javascript</find>
       <find>类型</find>
+      <find>函数</find>
+      <find>Functions</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -203,16 +205,15 @@
       <workItem from="1535721207135" duration="1456000" />
       <workItem from="1535981812362" duration="655000" />
       <workItem from="1536198695737" duration="1160000" />
-      <workItem from="1536485962868" duration="3268000" />
+      <workItem from="1536485962868" duration="4339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43512000" />
+    <option name="totallyTimeSpent" value="44583000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="23" width="1440" height="761" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -593,8 +594,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README_effective.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="211">
+          <caret line="212" column="24" lean-forward="true" selection-start-line="212" selection-start-column="24" selection-end-line="212" selection-end-column="24" />
         </state>
       </provider>
     </entry>
