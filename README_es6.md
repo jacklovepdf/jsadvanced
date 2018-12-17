@@ -5,37 +5,92 @@ of course, we cannot miss graph and demos to demonstrate!
 
 ## Table of Contents
 
-- [Process control statements loop](#process-control-statements-loop)
-- [Es6 Generator](#es6-generator)
-- [Prototype Inherit and class](#prototype-inherit)
-- [Variables Declaration](#variables-declaration)
-- [Value Types and Reference Types](#value-reference-type)
-- [Modules](#modules)
-- [Destructuring](#destructuring)
-- [Function](#function)
-- [This](#this)
-- [WebSocket](#websocket)
-- [Watcher](#watcher)
-- [SourceMap](#SourceMap)
-- [Throttle and Debounce](#throttle-and-debounce)
-- [Async and await](#async-and-await)
-- [Symbols](#symbols)
-- [Proxy and Reflect](#proxy-and-reflect)
-- [Decorator](#decorator)
+    - [Process control statements loop](#process-control-statements-loop)
+    - [Es6 Generator and Iterator](#es6-generator)
+    - [Prototype Inherit and class](#prototype-inherit-and-class)
+    - [Variables Declaration](#variables-declaration)
+    - [Value Types and Reference Types](#value-types-and-reference-types)
+    - [Modules](#modules)
+    - [Destructuring](#destructuring)
+    - [Function](#function)
+    - [This](#this)
+    - [WebSocket(eg. wsdemo)](#websocketeg-wsdemo)
+    - [Watcher(eg. watcher)](#watchereg-watcher)
+    - [SourceMap(eg. source-map)](#sourcemapeg-source-map)
+    - [Throttle and Debounce](#throttle-and-debounce)
+    - [Async and await](#async-and-await)
+    - [Symbols](#symbols)
+    - [Decorator](#decorator)
 
 ## Process control statements loop
 
 how to use loop statement more efficiently.
 
-## Es6 Generator
+## Es6 Generator and Iterator
+
+1.Iterator
+
+   对集合中每项进行处理是很常见的操作，从es6开始，js将迭代器和生成器的概念带入核心语言，并提供一种机制自定义for...of的行为；
+js中的迭代器是一个对象，它提供了一个next()方法，用来返回序列中的下一项。这个方法返回包含两个属性：done和 value；
 
 ```javascript
+    function makeIterator(array){
+        var nextIndex = 0;
+        return {
+            next: function(){
+                return nextIndex < array.length ?
+                    {value: array[nextIndex++], done: false} :
+                    {done: true};
+            }
+        };
+    }
 
+    var it = makeIterator(['yo', 'ya']);
+    console.log(it.next().value); // 'yo'
+    console.log(it.next().value); // 'ya'
+    console.log(it.next().done);  // true
 ```
+
+2.Generator
+
+2.1基本概念
+    自定义迭代器需要自己维护内部状态，存在安全风险；generator提供强大的选择，它允许你定义一个包含自有迭代算法的函数（生成器函数）， 同时它可以自动维护自己的状态。
+
+```javascript
+function* idMaker() {
+  var index = 0;
+  while(true)
+    yield index++;
+}
+
+var gen = idMaker();
+
+console.log(gen.next().value); // 0
+```
+
+2.2 可迭代对象
+
+    在js中定义了@@iterator方法的对象称为可迭代对象，即该对象必须定义属性Symbol.iterator;原生对象中有许多可迭代对象，例如：string,array, set和map; 在js中，有一些语法是构建在可迭代对象上的，它们是：for...of, 扩展运算符， yield*, 解构运算符；The next()方法也接受可用于修改生成器内部状态的值。传递给next()的值将被视为暂停生成器的最后一个yield表达式的结果。
+
+```javascript
+    var myIterable = {};
+    myIterable[Symbol.iterator] = function* () {
+        yield 1;
+        yield 2;
+        yield 3;
+    };
+
+    for (let value of myIterable) {
+        console.log(value);
+    }
+```
+
+## Map + Set + WeakMap + WeakSet
 
 ## Prototype Inherit and class
 
 1.combination inheritance(compose constructor stealing and prototype chain)
+
 ```javascript
     function SuperClass(name){
         this.name = name;
@@ -57,9 +112,11 @@ how to use loop statement more efficiently.
     };
     var SubObj = new SubClass("jacklin", 19);
 ```
+
 <img src="./images/composite.png" height="300">
 
 2.寄生组合继承模式
+
 ```javascript
     function SuperClass(name){
         this.name = name;
@@ -85,17 +142,19 @@ how to use loop statement more efficiently.
     var SubObj = new SubClass("jacklin", 19);
     console.log(SubObj);
 ```
+
 <img src="./images/parasitic.png" height="300">
 
-3. es6 class
+3.es6 class
 
     a very good document: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-    
+
 ```javascript
-    
+
 ```
 
 ## Variables Declaration
+
 * var
 * let
 * const
