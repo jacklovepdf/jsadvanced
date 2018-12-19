@@ -91,6 +91,37 @@ console.log(gen.next().value); // 0
 
 1.Set
 
+1.1 定义和使用
+
+```javascript
+    // definition
+    new Set([iterable])
+    // Properties
+    Set.prototype.size
+    // method
+    Set.prototype.add(value);
+    Set.prototype.delete(value);
+    Set.prototype.clear();
+    // Returns a new Iterator object that contains an array of [value, value] for each element in the Set object
+    Set.prototype.entries();
+    Set.prototype.forEach(callbackFn[, thisArg]);
+    Set.prototype.has(value);
+    Set.prototype.keys();
+    Set.prototype.values();
+    Set.prototype.values();
+```
+
+1.2 特性
+
+    值的集合，可迭代对象(与元素插入顺序一致)，一个值只能在Set中出现一次;
+
+1.3 Array和Set的比较
+
+(1) Array和Set可以相互转换：Set可以通过Array.from(Set)和[...Set]转换成数组，数组可以通过Set的构造函数转换成Set。
+(2) 判断一个元素是否存在，Set更高效（比array的indexOf等高效）。
+(3) Set可以根据值删除一个元素，而Array只能通过index。
+(4) Set存储的是唯一值。
+
 2.Map
 
 2.1 定义和使用
@@ -245,6 +276,7 @@ let 将会提升这个变量到语句块的顶部。然而，在这个语句块�
 
 const声明并初始化一个只读的常量。常量拥有块作用域。常量的值不能通过再赋值改变，也不能再次声明。
 这不意味着常量指向的值不可变，而是变量标识符的值只能赋值一次。
+
 ```javascript
     // 常量可以定义成对象
     const myObj = {"key": "value"};
@@ -258,13 +290,15 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
 ## Value Types and Reference Types
 
  引用类型使用的时候需要特别注意，如果一个全局引用类型在多个功能函数或者模块中使用, 特别需要注意当给全局引用类型复制给新参的时候，在功能函数或者模块内部修改形参（写操作）。
-    
+
 * 值类型
+
  ```javascript
       var a = 1;
       var b = a;
       console.log("b====>", b)// 1
  ```
+
 * 引用类型
 
 1. console打印引用类型
@@ -279,24 +313,21 @@ const声明并初始化一个只读的常量。常量拥有块作用域。常量
       // {name: "mike"}
  ```
 
-2. 引用类型作为实参传给功能函数（模块）,注意引用类型的写操作；
+2.引用类型作为实参传给功能函数（模块）,注意引用类型的写操作；
 
  ```javascript
     var person = {name: "jack", age: 19};
-    
     function updateName(person,name) {
         person.name = name;
     }
-    
     function updateAge(person,age) {
         person.age = age;
     }
-    
+
     updateName(person, "mike");
-    
  ```
 
-3. 使用JSON.parse(JSON.stringify(a))来实现引用类型的深度复制
+2.使用JSON.parse(JSON.stringify(a))来实现引用类型的深度复制
 
 <img src="./images/jsonTransfer.png" width="400">
 

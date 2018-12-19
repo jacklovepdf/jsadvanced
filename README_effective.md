@@ -4,13 +4,15 @@ summary of effective javascript
 
 ## Table of Contents
 
-- [Accustoming Yourself to Javascript](#accustoming-yourself-to-javascript)
-- [Variable Scope](#variable-scope)
-- [Working with Functions](#working-with-functions)
-- [Object and Prototype](#object-and-prototype)
-- [Arrays and Dictionary](#arrays-and-dictionary)
-- [Library and API Design](#library-and-api-design)
-- [Concurrency](#concurrency)
+- [effective javascript](#effective-javascript)
+    - [Table of Contents](#table-of-contents)
+    - [Accustoming Yourself to Javascript](#accustoming-yourself-to-javascript)
+    - [Variable Scope](#variable-scope)
+    - [Working with Functions](#working-with-functions)
+    - [Object and Prototype](#object-and-prototype)
+    - [Arrays and Dictionary](#arrays-and-dictionary)
+    - [Library and API Design](#library-and-api-design)
+    - [Concurrency](#concurrency)
 
 ## Accustoming Yourself to Javascript
 
@@ -19,6 +21,7 @@ summary of effective javascript
 1.1 总是在执行严格模式检查的环境中测试严格代码，尽量使用严格模式编写代码，并显示地将代码内容包裹在本地启用了严格模式的函数中；
 
 (1) 启用程序的严格模式
+
 ```javascript
     "use strict"
     //...
@@ -26,7 +29,9 @@ summary of effective javascript
         //...
     }
 ```
+
 (2) 启用函数的严格模式
+
 ```javascript
     //...
     function C(){
@@ -34,7 +39,9 @@ summary of effective javascript
         //...
     }
 ```
+
 (3) 最佳实践（现在模块系统在脚本链接的时候实现方式就是这样的）
+
 ```javascript
     // best practice
     (function(){
@@ -45,6 +52,7 @@ summary of effective javascript
         //....
     })();
 ```
+
 > **Note**: 由于"use strict"指令只有在脚本或者函数的顶部才能生效，导致实际项目开发过程中，由于链接多个模式不一致的文件可能导致一些没有启用严格模式的
 文件（模块）启用了严格模式，从而引发潜在的兼容性问题。或者即使你自己保证在自己的编写所有代码都启用严格模式或者都没有启用严格模式，但是在多人协作的大型项目中或者引用外部库文件的场景中，
 更本无法保证最终链接文件的运行模式。
@@ -100,6 +108,7 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 
 （4）＋运算符
 ＋运算符既重载了数字相加，又重载了字符串连接操作，当＋运算符两个操作数一个为字符串一个为数字类型时，＋运算符更偏爱进行字符串连接操作；
+
 ```javascript
     number(0) -------------> "0"
     undefined -------------> "undefined"
@@ -117,6 +126,7 @@ javascript中提供了6中数据类型，包括5中简单数据类型（或者�
 js中有7个假值: false、＋0、－0、null、undefined、NaN、"";
 
 （6）关系运算
+
 ```javascript
     1、==运算浮
     null  == undefined                      true
@@ -161,6 +171,7 @@ js字符串中该代码点表示长度为2；
 
 （2） feature
 即时外部函数已经返回，闭包任然可以引用外部函数定义的变量；
+
 ```javascript
     function FullName(firstName){
         return function(lastName){
@@ -171,9 +182,11 @@ js字符串中该代码点表示长度为2；
     firtNameLin("chengyong"); // lin chengyong
     firtNameLin("chengjia"); // lin chengjia
 ```
+
 > **Note**: 闭包会存储对外部变量的引用；闭包是js最优雅，最有表现力的特性之一；
 
 闭包可以更新外部变量的值；因为闭包存储了外部变量的引用，而不是它们的副本，因此，它可以更新外部变量的值；
+
 ```javascript
     function Person(){
         var name = "";
@@ -241,6 +254,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     }
     test(); // "global";
 ```
+
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 ## Working with Functions
@@ -253,6 +267,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 （2）方法调用
     在方法调用中，是由调用表达式自身来确定this变量的绑定；绑定到this变量的对象被称为**调用接受者**。
     方法的本质是通过特定对象调用的函数；
+
 ```javascript
     var obj = {
         hello: function(){
@@ -266,6 +281,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     }
     obj1.hello();//"hello, mark"
 ```
+
 （3）构造函数
     构造函数将一个全新的对象作为函数的接受者，变返回这个新对象作为调用的结果；
 
@@ -276,9 +292,10 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 14.自定义函数的接受者
     函数或者方法的接受者（即绑定到this值）是由调用者的语法决定的。
-    
+
 （1）call
     函数对象内置的call方法自定义接受者；
+
 ```javascript
     var hasOwnProperty = {}.hasOwnProperty;
     var dict = {
@@ -293,6 +310,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 （2）apply
     函数内置的apply方法与call方法类似，apply方法需要一个参数数组，然后将数组的每个元素作为调用的单独参数调用该函数；
+
 ```javascript
     function sum() {
        for(var i=0, sum=0; i<arguments.length; i++){
@@ -329,6 +347,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 （3）bind方法(es5)
     使用bind方法提取具有确定接受者的方法；
+
 ```javascript
     var buffer = {
         arr: [],
@@ -359,7 +378,8 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     var urls1 = paths.map(simpleUrl.bind(null,"http","baidu.com"));
     //函数柯里化，将函数与其参数的一个子集绑定的技术称为函数柯里化；
     //simpleUrl.bind除了绑定接受者参数的其余参数和提供给新函数的所有参数共同组成了传递给simpleUrl函数的参数；
-```    
+```
+
 （4）函数参数的数量
     函数有一个属性length来表明函数参数数量，这个属性常在一些流行的框架中用于根据参数数量不同来提供不同的功能；
 
@@ -367,6 +387,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     function func(a, b, c){}
     func.length ===  3;
 ```
+
 16.不要信赖函数的toString方法；
 
 17.避免使用非标准的栈检查属性；
@@ -385,7 +406,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     Object.getPrototypeOf(obj)是es5中用户获取对象原型的标准方法；
     obj._proto_是获取对象原型的非标准方法；
     //js中类是由一个构造函数和一个关联原型组成的设计模式；
-    
+
 ```javascript
     //获取对象的原型，非es5环境，es5环境用Object.getPrototypeOf
     if(typeof Object.getPrototypeOf === "undefined"){
@@ -399,18 +420,18 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
         }
     }
 ```
-    
+
 > **Note**: __proto__属性会污染所有对象，因此会导致大量的bug，应该禁止使用，同时应该禁止修改__proto__属性；
 
 （2）实例属性和原型属性
 
     优先将方法存储在实例对象的原型中，避免每个实例对象都有一份方法的副本，从而占用更多的内存；
-    
+
 （3）使用闭包存储私有数据
 
     js中对象并没有鼓励信息隐藏，所有的属性都可以很容易的访问；但是对于一些数据安全要求就高的应用来说，需要一些信息隐藏的机制来确保应用的安全。
     js为信息隐藏提供来一种非常可靠的机制－闭包；
-    
+
 ```javascript
     function User(age) {
         this.getAge = function() {
@@ -422,12 +443,12 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 ```
 
 （4）判断一个对象是否为空{}
+
  ```javascript
     //es6
-    Object.keys(obj).length === 0;
-    
+    Object.keys(obj).length === 0; 
  ```
- 
+
 > **Note**: 该实现是通过方法中引用变量的方式引用age，而不是通过this属性的方式引用；并且User实例中根本不包含任何实例属性，
 因此外部变量根本不能直接访问实例中的变量；缺点是由于将方法存储在实例中，导致方法副本的扩散。
 
@@ -436,6 +457,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 19.原型及原型链（继承）
 
 （1）借用父类构造函数
+
 ```javascript
     function Base(age) {
         this.age = age;
@@ -451,6 +473,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 > **Note**: 通过借用父类构造函数的方式将父类的实例属性添加到子类中；
 
 （2）引用父类的原型
+
 ```javascript
     //Object.create()的兼容写法
     if(typeof Object.create === "undefined"){
@@ -530,7 +553,7 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
 
 ## Arrays and Dictionary
 
-20. 字典的构建
+1. 字典的构建
 
 （1）使用Object的直接实例构造轻量级的字典
 
@@ -566,9 +589,8 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     }else {
         C.prototype = {__proto__: null}
     }
-    
 ```
-    
+
 > **Note**: 绝对不要在在字典中使用特殊的key值"_proto_"，一些环境中会将其作为特殊的属性对待；
 
 （3）使用hasOwnProperty方法避免原型污染
@@ -592,8 +614,8 @@ js没有块级作用域额一个例外是try...catch语句将捕获的异常绑�
     ECMAScript标准对并发修改在不同js环境下的行为没有明确的定义，如果枚举对象在枚举期间添加了新的属性，那么枚举期间并不能保证新添加的属性
 能给被访问。
     如果对象的内容可能在循环期间被修改，应该使用while或者经典的for循环。 
-    
-21. 数组的使用
+
+1.数组的使用
 
 （1）使用数组而不是字典来存储有序集合
 js的对象是一个无序的属性集合，获取或者设置不同的属性以相同的效率产生结果；使用for...in循环来枚举对象属性应当与顺序无关。
@@ -605,7 +627,7 @@ for...in循环行为也会收到原型污染的影响。我们可以用函数来
 ```javascript
     Object.defineProperties(Object.prototype, "allKeys", {
         value: function() {
-           var result = [];    
+           var result = [];
         },
         writable: true,
         enumerable: false,
@@ -616,7 +638,7 @@ for...in循环行为也会收到原型污染的影响。我们可以用函数来
 （3）迭代方法优于循环
 优秀的程序员讨厌编写重复代码，复制何粘贴样板代码会重复错误，使代码更难更改和难以维护；庆幸的是js的闭包是一种为这些模式建立迭代和抽象富有表现力的手法；
 可以避免我们编写重复的代码；
- 
+
  ```javascript
     //代码重复，终止条件容易出错
     var arr = [1,2,3];
@@ -672,6 +694,7 @@ Array.prototype中通用数组方法并不是所都可以被类数组对象使�
 
 23.关于API参数的约定
 （1）将undefined看做"没有值"
+
  ```javascript
     var x;
     x; //undefined
@@ -692,7 +715,6 @@ Array.prototype中通用数组方法并不是所都可以被类数组对象使�
 
  ```javascript
     function f(arg1, arg2, opts) {
-      
     }
  ```
 
@@ -710,10 +732,10 @@ Array.prototype中通用数组方法并不是所都可以被类数组对象使�
     var toString = {}.toString();
     toString.call(arr) === "[object Array]" // less than es5
  ```
- 
+
  (4)避免过度的强制类型转换
  特别地，在那些使用参数类型来决定重载函数行为的函数中，应该尽量避免强制类型转换；同时可以采用防御性的编程手段，对非预期输入就行处理；
- 
+
 23.避免不必要的状态
 api可以被分为两种，有状态和无状态，无状态的api提供的函数或者方法只取决于输入，而与状态无关。虽然有状态有时候是必须的，但无状态的api更容易学习
 和使用，且不容易出错。因此，尽可能的设计无状态的api, 如果api是有状态的，标出每个操作与那些状态有关。
@@ -735,13 +757,13 @@ api可以被分为两种，有状态和无状态，无状态的api提供的函�
         return user.toLowerCase();
     })
     console.log("users=====>", users);//["jack", "mike"]
-    
+
     //jquery中的链式调用
     $("#notification")
         .html("aaaa") // 有状态
         .removeClass("info")// 有状态
         .addClass("error")// 有状态
-        
+
     var ele = $("#notification");
     ele.html("aaa");
     ele.removeClass("info");
@@ -751,6 +773,7 @@ api可以被分为两种，有状态和无状态，无状态的api提供的函�
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
 ## Concurrency
+
 js作为一中嵌入式脚本语言，不是作为独立的应用程序运行，而是作为大型应用程序的脚本运行，最典型的是作为浏览器的脚本运行；
 一个浏览器可能打开多个窗口和标签运行多个web应用程序，每个应用程序响应不同的输入源（用户的键盘，鼠标，网络到达的数据，定时报警等等）；
 这些事件可能在web应用程序的生命周期的任何时刻发生，甚至同时发生；js通过使用一个简单的执行模型（事件队列和事件循环并发）和异步api来实现并发；
@@ -805,7 +828,7 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
    "starting";
    "finished"
  ```
- 
+
 ```javascript
     db.lookupAsync("url", downloadURL);
     function downloadURL(url){
@@ -815,13 +838,15 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
         console.log("contents of " + url + ":" + text);
     }
 ```
+
 > **Note**: 通过嵌套来实现异步操作会导致回调地狱，可以通过综合使用嵌套和命名函数减少过多的回调函数嵌套；
- 
+
  （2）不要在计算时阻塞事件
     为了保持客户端应用程序保持高度可交互性以及传入服务器应用程序的请求都能得到充分的服务，保持事件循环的每个轮次尽可能短是至关重要的；
   否则事件队列可能会滞销，其增长速度会超过分发处理事件处理程序的速度；因此一些代价高昂的计算可能导致糟糕的用户体验；一些通用的解决方案有：
   （1）使用浏览器中Worker API这样的并发机制
   （2）将计算进行分解为多个步骤，每个步骤组成一个可管理的工作块；（将计算分解到事件循环的多个轮次中）
+
 ```javascript
     function search(other ,callback) {
         var visted = {};
@@ -838,7 +863,7 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
 ```
 
  > **Note**: 对于循环的迭代，我们编写一个局部的next函数，该函数执行循环中单个迭代，然后调度应用程序事件队列来异步运行下一次迭代；
- 这样使得在此期间发生的其它的事件能够被处理，然后才执行一次迭代；
+这样使得在此期间发生的其它的事件能够被处理，然后才执行一次迭代；
 
 （3）绝不要同步的调用异步的回调函数；
 总是异步的调用回调函数，同步的调用异步回调函数扰乱了预期的操作顺序，可能导致意想不到的bug，同时同步调用异步回调函数可能导致栈移除；
@@ -866,6 +891,7 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
 通过编写共享的错误处理函数来避免复制和粘贴错误处理代码；确保明确的处理了所有的错误条件以避免丢弃错误；
 
 （1）同步代码中的异常处理
+
 ```javascript
     try {
         f();
@@ -877,6 +903,7 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
 
 （2）异步代码中错误处理
 异步api倾向于将错误表示为回调函数的特定参数或者一个附加的错误处理回调函数；
+
  ```javascript
     // 附加的错误处理回调函数
     downloadAsyc("file.txt", function(file) {
@@ -884,7 +911,7 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
     }, function(err) {
         console.log("err====>", err);
     });
-    
+
     // 回调函数的特定参数--nodejs中错误处理常用的手段
     downloadAsyc("file.txt", function(err, file) {
         if(err){
@@ -894,9 +921,9 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
         console.log("finished");
     });
  ```
- 
+
  28.对异步循环使用递归
- 
+
  ```javascript
     function dowloadOneAsync(urls, onSuccess, onfailure) {
         var len = urls.length;
@@ -912,10 +939,10 @@ macrotask -> microtask（由macrotask产生，eg, promise, process.nextTick等�
         tryNextURL(0);
     }
  ```
- 
+
  > **Note**: 当一个程序执行的时候有太多的函数调用，它会耗尽栈空间，最终抛出异常；
 
-29. 使用计数器来执行并行操作；
+1. 使用计数器来执行并行操作；
 
 js中应用程序的事件发生顺序是不确定的，即顺序不可预测的；使用计数器避免并行操作中数据竞争；
 
@@ -934,5 +961,5 @@ js中应用程序的事件发生顺序是不确定的，即顺序不可预测的
         })
     }
  ```
-<sup>[(back to table of contents)](#table-of-contents)</sup>
 
+<sup>[(back to table of contents)](#table-of-contents)</sup>
