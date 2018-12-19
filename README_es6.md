@@ -87,6 +87,75 @@ console.log(gen.next().value); // 0
 
 ## Map + Set + WeakMap + WeakSet
 
+    健值对的集合，很多算法中常见的数据结构；其中Map和Set是可迭代对象，迭代的顺序跟元素插入的顺序相同；
+
+1.Set
+
+2.Map
+
+2.1 定义和使用
+
+```javascript
+    // definition
+    new Map([iterable])
+    // Properties
+    Map.size
+    // method
+    Map.prototype.delete(key);
+    Map.prototype.has(key);
+    Map.prototype.get(key);
+    Map.prototype.delete(key, value);
+    Map.prototype.clear();
+
+    mapObj = new Map();
+    mapObj.set('dog', 'woof');
+    mapObj.set('cat', 'meow');
+    mapObj.size //2
+    for (var [key, value] of mapObj) {
+        console.log(key + ' goes ' + value);
+    }
+```
+
+2.2 特性
+
+    健值对的集合，可迭代（迭代次序根据元素插入的顺序一致；）
+
+2.3 比较Object和Map
+
+    Object和Map都可以存储键值对，都可以对其进行相应的增删改查等操作；但是Map还是有自己的优势，如下：
+
+(1) Object的键必须是字符串，而Map的键可以是任意值；
+(2) Map可以跟容易的获取到存储键值对的数量；
+(3) Map对象是可迭代对象，迭代次序是和元素插入顺序是一致的;
+(4) Object对象有原型，会污染集合（可以通过map = Object.create(null)）；
+
+3.WeakMap
+    WeakMap是键值对的集合，其中键是弱引用的；键必须是对象，值可以是任意值；
+
+3.1 定义和使用
+
+```javascript
+    // definition
+    new WeakMap([iterable])
+    // Properties
+    WeakMap.length
+    // method
+    WeakMap.prototype.delete(key);
+    WeakMap.prototype.has(key);
+    WeakMap.prototype.get(key);
+    WeakMap.prototype.delete(key, value);
+
+    weakObj = new WeakMap();
+```
+
+3.2 特性
+    键是弱引用的；键必须是对象，值可以是任意值；
+    特性决定功能：
+（1）键是不可枚举的, 无法获取keys，实例不是可迭代对象(若引用导致);
+（2）时间复杂度为O(1), 避免了内存泄漏;
+
+4.WeakSet
+
 ## Prototype Inherit and class
 
 1.combination inheritance(compose constructor stealing and prototype chain)
