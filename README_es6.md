@@ -20,6 +20,9 @@ of course, we cannot miss graph and demos to demonstrate!
     - [Throttle and Debounce](#throttle-and-debounce)
     - [Async and await](#async-and-await)
     - [Symbols](#symbols)
+    - [Reflect](#Reflect)
+    - [Proxy](#proxy)
+    - [Promises](#Promises)
     - [Decorator](#decorator)
 
 ## Process control statements loop
@@ -70,6 +73,7 @@ console.log(gen.next().value); // 0
 
 2.2 可迭代对象
 
+(1) 同步可迭代对象
     在js中定义了@@iterator方法的对象称为可迭代对象，即该对象必须定义属性Symbol.iterator;原生对象中有许多可迭代对象，例如：string,array, set和map; 在js中，有一些语法是构建在可迭代对象上的，它们是：for...of, 扩展运算符， yield*, 解构运算符；The next()方法也接受可用于修改生成器内部状态的值。传递给next()的值将被视为暂停生成器的最后一个yield表达式的结果。
 
 ```javascript
@@ -83,6 +87,21 @@ console.log(gen.next().value); // 0
     for (let value of myIterable) {
         console.log(value);
     }
+```
+
+(2) 异步可迭代对象
+    Iterator接口是一种数据遍历的协议，只要调用遍历器对象的next方法，就会得到一个对象；ES2018 引入了”异步遍历器“（Async Iterator），为异步操
+作提供原生的遍历器接口，即value和done这两个属性都是异步产生。异步遍历器的最大的语法特点，就是调用遍历器的next方法，返回的是一个Promise对象。对象的异步遍历器接口，部署在Symbol.asyncIterator属性上面;
+
+(3) 异步
+    异步遍历器的设计目的之一，就是 Generator 函数处理同步操作和异步操作时，能够使用同一套接口;
+
+```javascript
+    async function* gen() {
+        yield 'hello';
+    }
+    const genObj = gen();
+    genObj.next().then(x => console.log(x));
 ```
 
 ## Map + Set + WeakMap + WeakSet
@@ -617,31 +636,37 @@ This harms readability and maintainability.anonymous functions can make it harde
 
 * setter
 
-
 ## This
+
 函数的调用方式决定了this的值。this不能在执行期间被赋值，在每次函数被调用时this的值也可能会不同。
 ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被调用的。
 
 * 在全局作上下文中运行（任何函数外部),this指代全局对象。
+
 ```javascript
     function sum(num1, num2){
-    	return num1+num2;
+        return num1+num2;
     }
     sum(2,3);//5
     this.sum(2,1);//3
     window.sum(2,1);//3
 ```
+
 * 函数上下文
+
 >**Note**:在函数内部，this的值取决于**函数是如何调用的**。
 
 在严格模式下执行，并且this的值不会在函数执行时被设置，此时的this的值会默认设置为全局对象。
+
 ```javascript
     function f1(){
       return this;
     }
     f1() === window; // true
 ```
+
 在严格模式下，如果this未被执行的上下文环境定义，那么它将会默认为undefined。
+
 ```javascript
     function f2(){
       "use strict"; // 这里是严格模式
@@ -651,48 +676,50 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
 ```
 
 1. 以对象方法调用.
+
 >**Note**: 当以对象里的方法的方式调用函数时，它们的 this 是调用该函数的对象.
+
 ```javascript
     var obj = {
-    	prop: "jack",
-    	fa: function(){
-    		console.log(this.prop)
-    	},
-    	g: {
-    		prop: "kathy",
-    		fb: function(){
-    			console.log(this.prop)
-    		}
-    	}
+        prop: "jack",
+        fa: function(){
+            console.log(this.prop)
+        },
+        g: {
+            prop: "kathy",
+            fb: function(){
+                console.log(this.prop)
+            }
+        }
     }
     obj.fa();//jack
     obj.g.fb();//kathy
 
 
     var obj = {
-    	prop: "jack",
-    	fa: function(){
-    		console.log(this.prop)
-    	},
-    	g: {
-    		fb: function(){
-    			console.log(this.prop)
-    		}
-    	}
+        prop: "jack",
+        fa: function(){
+            console.log(this.prop)
+        },
+        g: {
+            fb: function(){
+                console.log(this.prop)
+            }
+        }
     }
     obj.fa();//jack
     obj.g.fb();//kathy
 
     var obj = {
-    	prop: "jack",
-    	fa: function(){
-    		console.log(this.prop)
-    	},
-    	g: {
-    		fb: function(){
-    			console.log(this)
-    		}
-    	}
+        prop: "jack",
+        fa: function(){
+            console.log(this.prop)
+        },
+        g: {
+            fb: function(){
+                console.log(this)
+            }
+        }
     }
     obj.fa();//jack
     obj.g.fb();//undefined
@@ -700,6 +727,7 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
 
 2.原型链中的 this
 >**Note**: 函数作为那个对象的方法，this就是指代是哪个对象（是父对象还是子对象）。
+
 ```javascript
     var o = {
       f : function(){
@@ -719,6 +747,7 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
 
 3.call 和 apply
 >**Note**: 所有函数都从Function对象的原型中继承的call()方法和apply()方法.
+
 ```javascript
     function add(c, d){
       return this.a + this.b + c + d;
@@ -735,11 +764,14 @@ ES5引入了bind方法来设置函数的this值，而不用考虑函数如何被
     add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
 ```
 
-4. bind
+4.bind
+
 ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函数中this将永久地被绑定到了bind的第一个参数，无论这个函数是如何被调用的。
 
-5. DOM事件处理函数中的 this
+5.DOM事件处理函数中的 this
+
 >**Note**: 当函数被用作事件处理函数时，它的this指向触发事件的元素（一些浏览器在使用非addEventListener的函数动态添加监听函数时不遵守这个约定）。
+
 ```javascript
     <div class="header">
             i am a worker.
@@ -755,15 +787,20 @@ ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函�
         ele[0].addEventListener("click",clickHandler, false);
     </script>
 ```
-6. 内联事件处理函数中的 this
+
+1. 内联事件处理函数中的 this
+
 当代码被内联处理函数调用时，它的this指向监听器所在的DOM元素：
+
 ```javascript
     //button
     <button onclick="alert(this.tagName.toLowerCase());">
       Show this
     </button>
 ```
+
 >**Note**: 只有外层代码中的this是这样设置的,函数体内部的this,根据具体情况而定。
+
 ```javascript
     //没有设置内部函数的 this，所以它指向 global/window 对象
     <button onclick="alert((function(){return this})());">
@@ -771,17 +808,20 @@ ECMAScript 5 引入了 Function.prototype.bind。调用f.bind(someObject)，函�
     </button>
 ```
 
-## WebSocket(eg. wsdemo)
+## WebSocket
+
    好的websocket解决方案：ws, socket.io
 
-
 ## Watcher(eg. watcher)
+
     详见demo-watcher,基于chokidar来实现的；
 
 ## SourceMap(eg. source-map)
+
     shttps://github.com/mozilla/source-map
 
 ## Throttle and Debounce
+
     函数去抖以及函数节流，函数节流和消抖的本质都是控制函数（实际场景中通常是事件的回调函数）的执行次数，不同点在于函数去抖是控制函数在一次操作中只执行一次(且为最后一次)；
 而定义这一次操作通常是通过单位时间来定义（eg，定时器的设定时间内的行为称为一次操作）；
 
@@ -850,11 +890,185 @@ _.throttle = function(func, wait, options) {
   };
 };
 ```
+
 ## Async and await
+
+    ES2017标准引入了async函数，使得异步操作变得更加方便。本质上它就是Generator函数的语法糖。
+
+1. async与generator对比
+
+(1) 内置执行器。
+Generator 函数的执行必须靠执行器，所以才有了co模块，而async函数自带执行器, 与普通函数一模一样;
+(2) 更好的语义。
+async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。
+(3) 更广的适用性。
+co模块约定，yield命令后面只能是 Thunk函数或Promise 对象，而async函数的await命令后面，可以是 Promise对象和原始类型的值;
+(3)返回值是 Promise。
+async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了;
+
+2.async and await的异常处理;
+
+(1) async函数内部return语句返回的值，会成为then方法回调函数的参数。
+
+```javascript
+async function f() {
+  throw new Error('出错了');
+}
+
+f().then(
+  v => console.log(v)
+).catch((error) => {
+    console.error("process error:", error);
+})
+```
+
+(2) Promise 对象的状态变化
+
+ async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误。也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数。
+
+(3) await命令
+
+    一般情况下来说，await命令后面是一个Promise对象，返回该对象的结果。如果不是Promise对象，就直接返回对应的值。
+如果await后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject。
+
+```javascript
+    async function f() {
+    // 等同于
+    // return 123;
+    return await 123;
+    }
+
+    f().then(v => console.log(v))
+```
+
+3.async and await使用注意事项;
+
+(1) await命令后面的Promise对象，运行结果可能是rejected，所以最好把await命令放在try...catch代码块中。
+
+```javascript
+    async function f() {
+    // 等同于
+    // return 123;
+    return await 123;
+    }
+
+    f().then(v => console.log(v))
+```
+
+(2) 多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发。
+
+```javascript
+    // bad
+    let foo = await getFoo();
+    let bar = await getBar();
+    // good
+    let fooPromise = getFoo();
+    let barPromise = getBar();
+    let foo = await fooPromise;
+    let bar = await barPromise;
+```
+
+(3) await命令只能用在async函数之中，如果用在普通函数，就会报错。
+
+(4) async 函数可以保留运行堆栈。
+
 
 ## Symbols
 
+2.1 定义
+    一种新的原始数据类型（其它的原始数据类型：string, boolean, number, objec, undefined, null），每一个Symbols都可以代表一个独一无二的值，
+可以用于解决对象属性名冲突的问题；
+
+```javascript
+    //接受字符串作为Symbol的描述符；
+    let s1 = Symbol('foo');
+    // 第一种写法
+    let a = {};
+    a[s1] = 'Hello!';
+
+    // 第二种写法
+    let a = {
+        [s1]: 'Hello!'
+    };
+
+    // 第三种写法
+    let a = {};
+    Object.defineProperty(a, s1, { value: 'Hello!' });
+```
+
+2.2特性
+
+(1) Symbol 值不能与其他类型的值进行运算；
+(2) 在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中;
+(3) 消除魔术字符串;
+(4) Symbol 作为属性名，该属性不会出现在for...in、for...of循环中，也不会被Object.keys、Object.getOwnPropertyNames、JSON.stringify返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。
+
+## Proxy
+
+    Proxy主要用于代理对象的行为，通过对被代理对象的代理，可以用于拦截对象的行为，对象虚拟化以及日志分析等；
+
+```javascript
+    //对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作;
+    var proxy = new Proxy(target, handler);
+
+    // Proxying a normal object
+    var target = {};
+    var handler = {
+        get: function (receiver, name) {
+            return `Hello, ${name}!`;
+        }
+    };
+
+    var p = new Proxy(target, handler);
+    p.world === "Hello, world!";
+
+    // Proxying a function object
+    var target = function () { return "I am the target"; };
+    var handler = {
+    apply: function (receiver, ...args) {
+        return "I am the proxy";
+    }
+    };
+
+    var p = new Proxy(target, handler);
+    p() === "I am the proxy";
+
+    //拦截对象属性的读取，比如proxy.foo和proxy['foo']。
+    get(target, propKey, receiver);
+    //拦截对象属性的设置，比如proxy.foo = v或proxy['foo'] = v，返回一个布尔值。
+    set(target, propKey, value, receiver);
+    //拦截propKey in proxy的操作，返回一个布尔值。
+    has(target, propKey);
+    //拦截delete proxy[propKey]的操作，返回一个布尔值。
+    deleteProperty(target, propKey);
+    //拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in循环，返回一个数组。//该方法返回目标对象所有自身的属性的属性名，而Object.keys()的返回结果仅包括目标对象自身的可遍历属性。
+    ownKeys(target);
+    //拦截Object.getOwnPropertyDescriptor(proxy, propKey)，返回属性的描述对象。
+    getOwnPropertyDescriptor(target, propKey);
+    //拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)，返回一个布尔值。
+    defineProperty(target, propKey, propDesc)：
+    //拦截Object.preventExtensions(proxy)，返回一个布尔值。
+    preventExtensions(target);
+    //拦截Object.getPrototypeOf(proxy)，返回一个对象。
+    getPrototypeOf(target);
+    //拦截Object.isExtensible(proxy)，返回一个布尔值。
+    isExtensible(target);
+    //拦截Object.setPrototypeOf(proxy, proto)，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。
+    setPrototypeOf(target, proto);
+    //拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)。
+    apply(target, object, args);
+    //：拦截 Proxy 实例作为构造函数调用的操作，比如new proxy(...args)。
+    construct(target, args)
+```
+
+## Promises
+
+1.将对象转换为Promise。
+
+```javascript
+    Promise.resolve('foo')
+    // 等价于
+    new Promise(resolve => resolve('foo'))
+```
 
 ## Decorator
-
-
