@@ -32,7 +32,7 @@
 //
 // client.connect('ws://localhost:8080/', 'echo-protocol');
 
-
+var WebSocket = require('ws');
 var client = new WebSocket('ws://localhost:8080/', 'echo-protocol');
 
 client.onerror = function() {

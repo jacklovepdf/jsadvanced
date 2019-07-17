@@ -17,6 +17,7 @@
     "socket.io": "^2.1.0"
   },
   "dependencies": {
+    "@byted/devtool-builded": "^1.0.7",
     "express": "^4.16.3",
     "websocket": "^1.0.26",
     "ws": "^5.1.1"

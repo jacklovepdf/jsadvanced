@@ -2076,7 +2076,7 @@ function isArray(obj) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var h = __webpack_require__(/*! virtual-dom/h */ "./node_modules/virtual-dom/h.js");
+        var h = __webpack_require__(/*! virtual-dom/h */ "./node_modules/virtual-dom/h.js");
         var diff = __webpack_require__(/*! virtual-dom/diff */ "./node_modules/virtual-dom/diff.js");
         var patch = __webpack_require__(/*! virtual-dom/patch */ "./node_modules/virtual-dom/patch.js");
         var createElement = __webpack_require__(/*! virtual-dom/create-element */ "./node_modules/virtual-dom/create-element.js");
@@ -2085,23 +2085,19 @@ var h = __webpack_require__(/*! virtual-dom/h */ "./node_modules/virtual-dom/h.j
         function render(count)  {
             return h('div', {
                 style: {
-                    textAlign: 'center',
-                    lineHeight: (100 + count) + 'px',
-                    border: '1px solid red',
-                    width: (100 + count) + 'px',
-                    height: (100 + count) + 'px'
+                    lineHeight: (100) + 'px'
                 }
             }, [String(count)]);
         }
 
         // 2: Initialise the document
         var count = 0;      // We need some app data. Here we just store a count.
-
-        var tree = render(count);               // We need an initial tree
-        console.log('begin tree====>', tree);
-        var rootNode = createElement(tree);     // Create an initial root DOM node ...
+debugger
+        var tree = render(count);               // We need an initial tree, 虚拟dom树；
+        console.log('begin render tree====>', tree);
+        var rootNode = createElement(tree);     // Create an initial root DOM node, 真实dom树；
         console.log('begin rootNode====>', rootNode);
-        document.body.appendChild(rootNode);    // ... and it should be in the document
+        document.body.appendChild(rootNode);    // ... and it should be in the document, 将dom树挂载在body上；
 
         // 3: Wire up the update logic
         setTimeout(function () {
