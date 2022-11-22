@@ -14,7 +14,7 @@
   "author": "jacklovepdf",
   "license": "MIT",
   "devDependencies": {
-    "socket.io": "^2.1.0"
+    "socket.io": "^2.5.0"
   },
   "dependencies": {
     "@byted/devtool-builded": "^1.0.7",
